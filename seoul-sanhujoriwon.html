@@ -24,6 +24,11 @@
   .gu-tab:hover{border-color:var(--rose);color:var(--rose-dark)}
   .gu-tab.active{background:var(--rose);border-color:var(--rose);color:#fff}
   .gu-tab.active .cnt{color:#ffe1e8}
+  .gu-tab.gu-all{border-color:var(--sage);color:var(--sage-dark);margin-right:6px}
+  .gu-tab.gu-all:hover{border-color:var(--sage-dark);color:var(--sage-dark)}
+  .gu-tab.gu-all .cnt{color:var(--sage-dark)}
+  .gu-tab.gu-all.active{background:var(--sage);border-color:var(--sage);color:#fff}
+  .gu-tab.gu-all.active .cnt{color:#dff0e6}
   .gu-title{font-size:1.4rem;font-weight:800;margin:6px 0 18px;display:flex;align-items:center;gap:8px}
   .gu-title .badge{font-size:.8rem;font-weight:700;background:var(--rose-soft);color:var(--rose-dark);padding:3px 11px;border-radius:999px}
   .center-card .no{font-size:.78rem;color:var(--ink-soft);font-weight:600}
@@ -286,6 +291,7 @@
   }
 
   function renderGu(gu){ curList = byGu[gu]; curTitle = esc(gu); curEmpty = ''; renderList(); }
+  function renderAll(){ curList = data; curTitle = '🗂 전체 서울'; curEmpty = ''; renderList(); }
   function renderSearch(q){
     var qq = q.trim().toLowerCase();
     curList = data.filter(function(c){ return (c.name+' '+c.addr+' '+c.gu).toLowerCase().indexOf(qq)!==-1; });
@@ -305,18 +311,24 @@
     else setSort(s);
   });
 
-  // 탭 생성
+  // 탭 생성: [전체] + 자치구별
+  function activate(btn){
+    document.getElementById('search').value='';
+    tabsBox.querySelectorAll('.gu-tab').forEach(function(x){x.classList.remove('active');});
+    btn.classList.add('active');
+    window.scrollTo({top: tabsBox.getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'});
+  }
+  var allTab = document.createElement('button');
+  allTab.className = 'gu-tab gu-all active';
+  allTab.innerHTML = '🗂 전체<span class="cnt">'+data.length+'</span>';
+  allTab.addEventListener('click', function(){ activate(allTab); activeGu=null; renderAll(); });
+  tabsBox.appendChild(allTab);
+
   order.forEach(function(gu){
     var b = document.createElement('button');
-    b.className = 'gu-tab' + (gu===activeGu?' active':'');
+    b.className = 'gu-tab';
     b.innerHTML = esc(gu) + '<span class="cnt">'+byGu[gu].length+'</span>';
-    b.addEventListener('click', function(){
-      document.getElementById('search').value='';
-      tabsBox.querySelectorAll('.gu-tab').forEach(function(x){x.classList.remove('active');});
-      b.classList.add('active');
-      activeGu = gu; renderGu(gu);
-      window.scrollTo({top: tabsBox.getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'});
-    });
+    b.addEventListener('click', function(){ activate(b); activeGu = gu; renderGu(gu); });
     tabsBox.appendChild(b);
   });
 
@@ -327,7 +339,7 @@
     var q = e.target.value;
     t = setTimeout(function(){
       if(q.trim()){ tabsBox.querySelectorAll('.gu-tab').forEach(function(x){x.classList.remove('active');}); renderSearch(q); }
-      else { tabsBox.querySelector('.gu-tab').classList.add('active'); activeGu=order[0]; renderGu(order[0]); }
+      else { tabsBox.querySelectorAll('.gu-tab').forEach(function(x){x.classList.remove('active');}); allTab.classList.add('active'); activeGu=null; renderAll(); }
     }, 180);
   });
 
@@ -360,7 +372,7 @@
     else if(e.key==='ArrowRight') lbStep(1);
   });
 
-  renderGu(activeGu);
+  renderAll();
 })();
 </script>
 </body>
