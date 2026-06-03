@@ -79,7 +79,7 @@ const SEOUL_CENTERS = [
   {no:73,gu:"서초구",name:"SK산후조리원",addr:"서울시 서초구 동작대로 172",tel:"02-592-0020",normal:"400",special:"500",web:"www.skcare.biz"},
   {no:74,gu:"서초구",name:"센트리움산후조리원",addr:"서울시 서초구 고무래로 22",tel:"02-535-3853",normal:"480",special:"510",web:"www.centrium.kr"},
   {no:75,gu:"서초구",name:"서래네상스산후조리원",addr:"서울시 서초구 반포4동 107-45",tel:"02-537-3232",normal:"450",special:"550",web:"http://seoraeanaissance.com"},
-  {no:76,gu:"성북구",name:"이든포레산후조리원",addr:"서울시 성북구 고산자로6길 40, 601호",tel:"02-2291-1004",normal:"520",special:"",web:"https://ef23.co.kr/"},
+  {no:76,gu:"성동구",name:"이든포레산후조리원",addr:"서울시 성동구 고산자로6길 40, 601호 (행당동)",tel:"02-2291-1004",normal:"520",special:"",web:"https://ef23.co.kr/"},
   {no:77,gu:"성북구",name:"마리아산후조리원",addr:"서울시 성북구 화랑로 248, 장위남부로 8층",tel:"010-8641-0268",normal:"350",special:"",web:"www.mariacare.co.kr"},
   {no:78,gu:"성북구",name:"라송산후조리원",addr:"서울시 성북구 동소문로 48, 3층",tel:"02-922-1400",normal:"450",special:"",web:""},
   {no:79,gu:"송파구",name:"라렌느산후조리원",addr:"서울시 송파구 석촌호수로156, 6,7층",tel:"02-414-3322",normal:"350",special:"380",web:"http://lareine.kr/"},
