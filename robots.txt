@@ -1,0 +1,35 @@
+# 광진구 임신·출산 가이드 — robots.txt
+# 배포 시 jackiehongk.github.io/imsin-gwangjin 를 실제 도메인으로 교체하세요.
+
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /analytics/
+
+# 검색엔진 크롤러 (네이버/다음/구글/빙)
+User-agent: Yeti
+Allow: /
+User-agent: Daumoa
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+
+# AI 답변엔진 크롤러 (GEO) — 콘텐츠 인용 허용
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://jackiehongk.github.io/imsin-gwangjin/sitemap.xml

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f9e3e7"/>
+      <stop offset="55%" stop-color="#fdf9f6"/>
+      <stop offset="100%" stop-color="#e4f0e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="80" y="150" font-size="40" font-family="sans-serif">🤰</text>
+  <text x="140" y="150" font-size="34" font-weight="700" fill="#3b3a3c" font-family="sans-serif">광진구 임신·출산 가이드</text>
+  <text x="80" y="290" font-size="72" font-weight="800" fill="#3b3a3c" font-family="sans-serif">임신, 주차별로</text>
+  <text x="80" y="380" font-size="72" font-weight="800" fill="#c1556d" font-family="sans-serif">차근차근 챙겨요</text>
+  <text x="80" y="470" font-size="34" fill="#6c6a6e" font-family="sans-serif">광진구 산후조리원 · 출산 복지정책 · 음식·약품·운동 가이드</text>
+  <text x="80" y="520" font-size="30" fill="#5e9272" font-weight="700" font-family="sans-serif">공신력 출처 기반 · 2025~2026 최신</text>
+  <rect x="80" y="560" width="240" height="10" rx="5" fill="#d96e85"/>
+  <rect x="330" y="560" width="120" height="10" rx="5" fill="#7bae8e"/>
+</svg>

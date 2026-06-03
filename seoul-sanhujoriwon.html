@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>서울시 산후조리원 전체 목록 | 구별 가격·위치·홈페이지</title>
+<meta name="description" content="서울시 25개 자치구 산후조리원 112곳의 2주 이용요금(일반실·특실), 네이버 지도 위치, 네이버 검색, 홈페이지 링크를 구별 탭으로 정리. 출처: 서울시 2025년 6월 산후조리원 이용요금 현황." />
+<meta name="robots" content="index, follow" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .search-box{flex:1;min-width:220px;position:relative}
+  .search-box input{width:100%;font-family:inherit;font-size:1rem;padding:12px 16px 12px 42px;border:1px solid var(--line);
+    border-radius:999px;background:var(--white);box-shadow:var(--shadow);color:var(--ink)}
+  .search-box input:focus{outline:none;border-color:var(--rose)}
+  .search-box::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.6}
+  .gu-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+  .gu-tab{border:1px solid var(--line);background:var(--white);color:var(--ink-soft);font-family:inherit;
+    font-weight:700;font-size:.9rem;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .15s}
+  .gu-tab .cnt{color:var(--rose);margin-left:5px;font-size:.82rem}
+  .gu-tab:hover{border-color:var(--rose);color:var(--rose-dark)}
+  .gu-tab.active{background:var(--rose);border-color:var(--rose);color:#fff}
+  .gu-tab.active .cnt{color:#ffe1e8}
+  .gu-title{font-size:1.4rem;font-weight:800;margin:6px 0 18px;display:flex;align-items:center;gap:8px}
+  .gu-title .badge{font-size:.8rem;font-weight:700;background:var(--rose-soft);color:var(--rose-dark);padding:3px 11px;border-radius:999px}
+  .center-card .no{font-size:.78rem;color:var(--ink-soft);font-weight:600}
+  .center-card .web-warn{font-size:.8rem;color:var(--ink-soft)}
+  .btn.search{background:#eef4ff;border-color:#d4e2f7;color:#3b6ab0}
+  .btn.search:hover{background:#3b6ab0;border-color:#3b6ab0;color:#fff}
+  .btn.home{background:var(--sage-soft);border-color:#cfe5d6;color:var(--sage-dark)}
+  .btn.home:hover{background:var(--sage);border-color:var(--sage);color:#fff}
+  .empty-msg{text-align:center;color:var(--ink-soft);padding:40px;font-size:1rem}
+  .backlink{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink-soft);margin-bottom:8px}
+  /* 썸네일 */
+  .center-card{overflow:hidden;padding-top:0!important}
+  .card-thumb{margin:0 -22px 14px}
+  .thumb-rep{width:100%;height:172px;object-fit:cover;display:block;cursor:zoom-in;background:var(--cream-2)}
+  .thumb-subs{display:flex;gap:4px;padding:4px;background:var(--cream-2)}
+  .thumb-subs img{flex:1;min-width:0;height:48px;object-fit:cover;border-radius:6px;cursor:zoom-in}
+  .thumb-ph{height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff}
+  .thumb-ph .ph-ic{font-size:2.2rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2))}
+  .thumb-ph .ph-nm{font-size:.86rem;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .center-card .no{padding-top:2px}
+  /* 라이트박스 */
+  .lightbox{position:fixed;inset:0;z-index:1000;background:rgba(20,15,18,.92);display:none;align-items:center;justify-content:center}
+  .lightbox.open{display:flex}
+  .lb-img{max-width:92vw;max-height:86vh;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  .lb-x{position:absolute;top:18px;right:22px;font-size:1.6rem;background:none;border:0;color:#fff;cursor:pointer}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;background:none;border:0;color:#fff;cursor:pointer;padding:0 18px;opacity:.8}
+  .lb-nav:hover{opacity:1}
+  .lb-prev{left:6px}.lb-next{right:6px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <div class="brand"><span class="logo">🤰</span> 임신 가이드</div>
+    <nav class="nav-links">
+      <a href="seoul-compare.html">구별 비교</a>
+      <a href="index.html#centers">광진구 산후조리원</a>
+      <a href="index.html#welfare">복지정책</a>
+      <a href="index.html">메인으로</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <a class="backlink" href="index.html">← 메인으로</a>
+    <h1 style="font-size:2.1rem;">서울시 산후조리원 <span class="accent">전체 목록</span></h1>
+    <p class="lead">서울 25개 자치구 산후조리원의 2주 이용요금·위치·홈페이지를 구별로 정리했어요.
+      각 카드의 버튼으로 <b>네이버 지도·검색·홈페이지</b>로 바로 이동합니다.</p>
+    <div class="hero-badges">
+      <span class="badge">🏥 총 <b id="totalCount">–</b>곳</span>
+      <span class="badge">🗺️ <b id="guCount">–</b>개 자치구</span>
+      <span class="badge">📄 서울시 <b>2025.6</b> 기준</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="margin-top:26px;">
+  <div class="disclaimer">
+    <strong>⚠️ 안내</strong> · 출처는 <a href="https://news.seoul.go.kr" target="_blank" rel="noopener">서울시 「2025년 6월 산후조리원 이용요금 현황」</a>입니다.
+    요금은 <b>2주 기준·같은 등급 내 가장 높은 금액(만원)</b>이며 프로그램·행사에 따라 변동될 수 있습니다.
+    스캔 문서를 판독해 옮긴 자료라 일부 상호·주소·홈페이지 주소에 오기가 있을 수 있으니 <b>방문·결제 전 반드시 시설에 직접 확인</b>하세요.
+  </div>
+</div>
+
+<section class="block" style="padding-top:34px;">
+  <div class="wrap">
+    <div class="toolbar">
+      <div class="search-box">
+        <input id="search" type="search" placeholder="조리원 이름·동네로 검색 (예: 궁, 마곡, 라쏘)" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="gu-tabs" id="guTabs"></div>
+    <div id="results"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="brand"><span class="logo">🤰</span> 임신 가이드</div>
+    <p>출처: 서울시 2025년 6월 산후조리원 이용요금 현황 · 요금/정보는 변동될 수 있으니 시설에 직접 확인하세요.</p>
+  </div>
+</footer>
+
+<script src="seoul-data.js"></script>
+<script src="thumbs.js"></script>
+<script>
+(function(){
+  "use strict";
+  var data = SEOUL_CENTERS;
+  var THUMBS = (typeof SEOUL_THUMBS !== "undefined") ? SEOUL_THUMBS : {};
+
+  // 자치구 순서(데이터 등장 순) 및 개수
+  var order = [], byGu = {};
+  data.forEach(function(c){
+    if(!byGu[c.gu]){ byGu[c.gu]=[]; order.push(c.gu); }
+    byGu[c.gu].push(c);
+  });
+  document.getElementById('totalCount').textContent = data.length;
+  document.getElementById('guCount').textContent = order.length;
+
+  // ---- 링크 빌더 ----
+  function naverMap(c){ return 'https://map.naver.com/p/search/' + encodeURIComponent(c.addr.replace(/^서울시\s*/,'서울 ')); }
+  function naverSearch(c){ return 'https://search.naver.com/search.naver?query=' + encodeURIComponent(c.name); }
+  function cleanWeb(w){
+    if(!w) return null;
+    w = w.trim();
+    if(/[가-힣]/.test(w)) return null;                 // 한글 도메인/텍스트 → 검색으로 대체
+    if(/[@|\s]/.test(w)) return null;                  // 이메일/깨진 값
+    if(!/\.[a-z]{2,}/i.test(w)) return null;            // 도메인 형태 아님
+    if(!/^https?:\/\//i.test(w)) w = 'https://' + w;
+    return w;
+  }
+  function homeLink(c){
+    var url = cleanWeb(c.web);
+    if(url) return {href:url, label:'🌐 홈페이지', cls:'home', title:url};
+    return {href:'https://search.naver.com/search.naver?query='+encodeURIComponent(c.name+' 홈페이지'),
+            label:'🌐 홈페이지 찾기', cls:'search', title:'PDF에 홈페이지가 없거나 불명확 → 네이버에서 검색'};
+  }
+  function priceTag(label,val){
+    return '<div class="price-tag"><div class="label">'+label+'</div><div class="val">'+
+      (val? val+'<small style="font-size:.6em">만</small>' : '—')+'</div></div>';
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  var PH = ["#d96e85,#f6b8c4","#7bae8e,#bfe0cd","#e0a458,#f4d6a8","#9ad7ff,#d2ecff","#c4a7ff,#e6dcff","#ff8c69,#ffc6b5"];
+  function thumbBlock(c){
+    var t = THUMBS[c.no] || THUMBS[String(c.no)];
+    if (t && t.rep) {
+      var subs = (t.subs || []).slice(0,5);
+      return '<div class="card-thumb">'+
+        '<img class="thumb-rep" src="'+t.rep+'" alt="'+esc(c.name)+' 대표사진" loading="lazy" data-full="'+t.rep+'">'+
+        (subs.length ? '<div class="thumb-subs">'+subs.map(function(s){
+            return '<img src="'+s+'" alt="'+esc(c.name)+' 사진" loading="lazy" data-full="'+s+'">';
+          }).join('')+'</div>' : '')+
+      '</div>';
+    }
+    var g = PH[c.no % PH.length];
+    return '<div class="card-thumb"><div class="thumb-ph" style="background:linear-gradient(135deg,'+g+')">'+
+      '<span class="ph-ic">🏥</span><span class="ph-nm">'+esc(c.name.replace(/산후조리원.*$/,'').slice(0,10))+'</span></div></div>';
+  }
+
+  function cardHTML(c){
+    var h = homeLink(c);
+    return '<div class="center-card">'+
+      thumbBlock(c)+
+      '<div class="no">No.'+c.no+' · '+esc(c.gu)+'</div>'+
+      '<h4>'+esc(c.name)+'</h4>'+
+      '<div class="addr">📍 '+esc(c.addr)+'</div>'+
+      '<div class="price-row">'+priceTag('일반실',c.normal)+priceTag('특실',c.special)+'</div>'+
+      '<div class="actions">'+
+        '<a class="btn tel" href="tel:'+c.tel.replace(/-/g,'')+'">📞 '+esc(c.tel)+'</a>'+
+        '<a class="btn" href="'+naverMap(c)+'" target="_blank" rel="noopener">📍 위치</a>'+
+        '<a class="btn search" href="'+naverSearch(c)+'" target="_blank" rel="noopener">🔎 네이버 검색</a>'+
+        '<a class="btn '+h.cls+'" href="'+h.href+'" target="_blank" rel="noopener" title="'+esc(h.title)+'">'+h.label+'</a>'+
+      '</div>'+
+    '</div>';
+  }
+
+  var results = document.getElementById('results');
+  var tabsBox = document.getElementById('guTabs');
+  var activeGu = order[0];
+
+  function renderGu(gu){
+    var list = byGu[gu];
+    results.innerHTML =
+      '<div class="gu-title">'+esc(gu)+' <span class="badge">'+list.length+'곳</span></div>'+
+      '<div class="center-grid">'+ list.map(cardHTML).join('') +'</div>';
+  }
+
+  function renderSearch(q){
+    q = q.trim().toLowerCase();
+    var hits = data.filter(function(c){
+      return (c.name+' '+c.addr+' '+c.gu).toLowerCase().indexOf(q) !== -1;
+    });
+    if(!hits.length){ results.innerHTML = '<div class="empty-msg">‘'+esc(q)+'’ 검색 결과가 없어요.</div>'; return; }
+    results.innerHTML =
+      '<div class="gu-title">🔎 검색결과 <span class="badge">'+hits.length+'곳</span></div>'+
+      '<div class="center-grid">'+ hits.map(cardHTML).join('') +'</div>';
+  }
+
+  // 탭 생성
+  order.forEach(function(gu){
+    var b = document.createElement('button');
+    b.className = 'gu-tab' + (gu===activeGu?' active':'');
+    b.innerHTML = esc(gu) + '<span class="cnt">'+byGu[gu].length+'</span>';
+    b.addEventListener('click', function(){
+      document.getElementById('search').value='';
+      tabsBox.querySelectorAll('.gu-tab').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      activeGu = gu; renderGu(gu);
+      window.scrollTo({top: tabsBox.getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'});
+    });
+    tabsBox.appendChild(b);
+  });
+
+  // 검색
+  var t;
+  document.getElementById('search').addEventListener('input', function(e){
+    clearTimeout(t);
+    var q = e.target.value;
+    t = setTimeout(function(){
+      if(q.trim()){ tabsBox.querySelectorAll('.gu-tab').forEach(function(x){x.classList.remove('active');}); renderSearch(q); }
+      else { tabsBox.querySelector('.gu-tab').classList.add('active'); activeGu=order[0]; renderGu(order[0]); }
+    }, 180);
+  });
+
+  // ---- 라이트박스(사진 확대) ----
+  var lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<button class="lb-x" aria-label="닫기">✕</button>'+
+                 '<button class="lb-nav lb-prev" aria-label="이전">‹</button>'+
+                 '<img class="lb-img" alt="">'+
+                 '<button class="lb-nav lb-next" aria-label="다음">›</button>';
+  document.body.appendChild(lb);
+  var lbList = [], lbIdx = 0, lbImg = lb.querySelector('.lb-img');
+  function lbShow(){ lbImg.src = lbList[lbIdx]; }
+  function lbClose(){ lb.classList.remove('open'); lbImg.src=''; }
+  function lbStep(d){ if(lbList.length){ lbIdx=(lbIdx+d+lbList.length)%lbList.length; lbShow(); } }
+  document.addEventListener('click', function(e){
+    var img = e.target.closest && e.target.closest('.card-thumb img[data-full]');
+    if(img){
+      var imgs=[].map.call(img.closest('.card-thumb').querySelectorAll('img[data-full]'), function(x){return x.dataset.full;});
+      lbList=imgs; lbIdx=Math.max(0,imgs.indexOf(img.dataset.full)); lbShow(); lb.classList.add('open'); return;
+    }
+    if(e.target===lb || e.target.classList.contains('lb-x')){ lbClose(); }
+    else if(e.target.classList.contains('lb-prev')){ lbStep(-1); }
+    else if(e.target.classList.contains('lb-next')){ lbStep(1); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') lbClose();
+    else if(e.key==='ArrowLeft') lbStep(-1);
+    else if(e.key==='ArrowRight') lbStep(1);
+  });
+
+  renderGu(activeGu);
+})();
+</script>
+</body>
+</html>

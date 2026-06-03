@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>트래픽 분석 대시보드 · 광진구 임신 가이드</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<style>
+  :root{--rose:#d96e85;--rose-d:#c1556d;--sage:#7bae8e;--sage-d:#5e9272;--ink:#3b3a3c;--muted:#6c6a6e;
+        --line:#ece4de;--cream:#fdf9f6;--card:#fff;--shadow:0 6px 22px rgba(150,110,110,.10);--gold:#e0a458;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+       background:var(--cream);color:var(--ink);line-height:1.6;letter-spacing:-.01em;padding:0 0 60px}
+  header{background:var(--ink);color:#fff;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  header h1{font-size:1.2rem;display:flex;align-items:center;gap:8px}
+  header .sub{color:#cbb;font-size:.82rem;font-weight:400}
+  .ranges{display:flex;gap:6px}
+  .ranges button{background:#574f53;color:#eee;border:0;border-radius:999px;padding:7px 15px;font-weight:700;
+                 font-family:inherit;cursor:pointer;font-size:.85rem}
+  .ranges button.active{background:var(--rose)}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 22px}
+  .grid{display:grid;gap:16px}
+  .cards{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:22px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+  .stat .label{font-size:.82rem;color:var(--muted);font-weight:600}
+  .stat .num{font-size:1.9rem;font-weight:800;color:var(--rose-d);margin-top:4px}
+  .stat .num.sage{color:var(--sage-d)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .panel h2{font-size:1.02rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .panel h2 .tag{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--rose);color:#fff}
+  .panel h2 .tag.local{background:var(--gold)}
+  .cols{grid-template-columns:1fr 1fr}
+  @media(max-width:760px){.cols{grid-template-columns:1fr}}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.9rem}
+  .bar-row .name{width:42%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+  .bar-row .track{flex:1;background:#f3ebe6;border-radius:6px;height:18px;overflow:hidden}
+  .bar-row .fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--rose-d));border-radius:6px}
+  .bar-row .fill.sage{background:linear-gradient(90deg,var(--sage),var(--sage-d))}
+  .bar-row .fill.gold{background:linear-gradient(90deg,#eec07a,var(--gold))}
+  .bar-row .val{width:46px;text-align:right;font-weight:700;color:var(--muted)}
+  .empty{color:var(--muted);font-size:.9rem;padding:8px 0}
+  svg.timeline{width:100%;height:170px;display:block}
+  .legend{font-size:.78rem;color:var(--muted);display:flex;gap:14px;margin-top:6px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+  .note{font-size:.8rem;color:var(--muted);margin-top:18px;text-align:center}
+  .updated{font-size:.78rem;color:#cbb}
+</style>
+</head>
+<body>
+<header>
+  <h1>📊 트래픽 분석 <span class="sub">광진구 임신·출산 가이드 · 자체 집계(GA 미사용)</span></h1>
+  <div class="ranges" id="ranges">
+    <button data-days="7">7일</button>
+    <button data-days="30" class="active">30일</button>
+    <button data-days="90">90일</button>
+    <button data-days="3650">전체</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid cards" id="summary"></div>
+
+  <div class="panel">
+    <h2>📈 일별 추이</h2>
+    <svg class="timeline" id="timeline" viewBox="0 0 1000 170" preserveAspectRatio="none"></svg>
+    <div class="legend"><span><i style="background:#d96e85"></i>페이지뷰</span><span><i style="background:#7bae8e"></i>방문자</span></div>
+  </div>
+
+  <div class="panel" style="border:2px solid var(--gold)">
+    <h2><span class="tag local">광진구</span> 지역 검색 유입 키워드</h2>
+    <div id="local_keywords"></div>
+    <p class="note" style="text-align:left">‘광진/산후조리/지원금/자양/구의’ 등 지역 의도가 담긴 검색어만 추렸어요. 비어 있으면 아직 지역 검색 유입이 없거나 검색엔진이 키워드를 넘기지 않은 경우입니다.</p>
+  </div>
+
+  <div class="grid cols">
+    <div class="panel"><h2>🔎 유입 소스</h2><div id="sources"></div></div>
+    <div class="panel"><h2>🧭 유입 매체</h2><div id="mediums"></div></div>
+  </div>
+
+  <div class="panel"><h2>💬 전체 검색 키워드</h2><div id="keywords"></div></div>
+
+  <div class="grid cols">
+    <div class="panel"><h2>📄 인기 페이지</h2><div id="top_pages"></div></div>
+    <div class="panel"><h2>👀 많이 본 섹션</h2><div id="sections"></div></div>
+  </div>
+
+  <div class="grid cols">
+    <div class="panel"><h2>📱 기기</h2><div id="devices"></div></div>
+    <div class="panel"><h2>🌐 브라우저</h2><div id="browsers"></div></div>
+  </div>
+
+  <div class="grid cols">
+    <div class="panel"><h2>🖱️ 전환 클릭(종류)</h2><div id="clicks_by_kind"></div></div>
+    <div class="panel"><h2>🔗 많이 누른 링크</h2><div id="top_clicks"></div></div>
+  </div>
+
+  <p class="note">데이터: 같은 도메인 <code>analytics/events.ndjson</code> · 쿠키 없음 · 원본 IP 미저장 · <span class="updated" id="updated"></span></p>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

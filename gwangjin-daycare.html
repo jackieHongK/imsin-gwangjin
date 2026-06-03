@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>광진구 어린이집 입소대기 가이드 | 신청방법·우선순위·데이터 조회</title>
+<meta name="description" content="광진구 어린이집 입소대기(등록대기) 신청 방법, 아이사랑 포털 최대 3곳 동시신청, 우선순위 점수제(맞벌이·다자녀), 대기 실태와 조기신청 전략, 광진구 어린이집 정원·현원 데이터 조회처를 공식 출처와 함께 정리." />
+<meta name="robots" content="index, follow" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .backlink{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink-soft);margin-bottom:8px}
+  .step-list{counter-reset:step;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+  .step{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px 18px 60px;box-shadow:var(--shadow)}
+  .step::before{counter-increment:step;content:counter(step);position:absolute;left:18px;top:18px;width:30px;height:30px;
+    background:var(--rose);color:#fff;border-radius:50%;display:grid;place-items:center;font-weight:800}
+  .step h4{font-size:1.05rem;margin-bottom:5px}
+  .step p{font-size:.92rem;color:var(--ink-soft)}
+  .src-card{display:flex;flex-direction:column}
+  .src-card .star{font-size:.74rem;font-weight:800;color:#fff;background:var(--gold);padding:2px 9px;border-radius:999px;align-self:flex-start;margin-bottom:8px}
+  .src-card .fmt{display:inline-block;font-size:.74rem;font-weight:700;background:var(--cream-2);color:var(--ink-soft);padding:2px 8px;border-radius:6px;margin-left:6px}
+  .src-card p{font-size:.92rem;color:var(--ink-soft);flex:1;margin:6px 0 14px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <div class="brand"><span class="logo">🤰</span> 임신 가이드</div>
+    <nav class="nav-links">
+      <a href="index.html#centers">산후조리원</a>
+      <a href="seoul-sanhujoriwon.html">서울 전체</a>
+      <a href="index.html#welfare">복지정책</a>
+      <a href="index.html">메인으로</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <a class="backlink" href="index.html">← 메인으로</a>
+    <h1 style="font-size:2.1rem;">광진구 <span class="accent">어린이집 입소대기</span> 가이드</h1>
+    <p class="lead">국공립은 대기 100번도 흔해요. <b>임신 중부터 미리 신청</b>하는 게 사실상 필수입니다.
+      신청 방법·우선순위·전략과 함께, 광진구 어린이집 <b>정원·현원 데이터를 직접 조회</b>하는 법까지 정리했어요.</p>
+    <div class="hero-badges">
+      <span class="badge">📝 신청 <b>아이사랑</b></span>
+      <span class="badge">🎯 최대 <b>3곳</b> 동시신청</span>
+      <span class="badge">🤰 <b>임신 중</b>에도 신청</span>
+      <span class="badge">📊 광진구 <b>데이터 조회</b></span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="margin-top:26px;">
+  <div class="disclaimer">
+    <strong>⚠️ 안내</strong> · 입소(등록)대기 제도와 우선순위는 보건복지부 보육사업안내를 따르되 <b>자치구별 세부기준에 차이</b>가 있습니다.
+    정확한 점수·서류·현황은 신청 전 <b>아이사랑(1566-3232)</b> 또는 <b>광진구청 보육부서</b>에 확인하세요. 데이터 수치는 조회 시점에 따라 달라집니다.
+  </div>
+</div>
+
+<!-- ===== 한눈에 ===== -->
+<section class="block" id="overview">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Overview</span>
+      <h2>입소대기, 한눈에</h2>
+      <p>'입소대기'의 현재 공식 명칭은 <b>등록대기</b>이고, 전국 단일 시스템 <b>아이사랑</b>으로 운영돼요.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h4><span class="ic">💻</span>어디서 신청?</h4>
+        <ul>
+          <li>아이사랑 임신육아종합포털(앱/웹)</li>
+          <li>연중 수시 신청, 본인인증 필요</li>
+          <li>또는 희망 어린이집 방문 신청</li>
+        </ul>
+        <p class="src"><a href="https://www.childcare.go.kr/?menuno=172" target="_blank" rel="noopener">출처 · 아이사랑 등록대기 안내</a></p>
+      </div>
+      <div class="card">
+        <h4><span class="ic">🎯</span>몇 곳까지?</h4>
+        <ul>
+          <li>미재원 아동: <b>최대 3곳</b> 동시 신청</li>
+          <li>재원(현재 다니는) 아동: 최대 2곳</li>
+          <li>대기 중 신청 어린이집 변경 가능</li>
+        </ul>
+        <p class="src"><a href="https://www.childcare.go.kr/?menuno=169" target="_blank" rel="noopener">출처 · 아이사랑</a></p>
+      </div>
+      <div class="card">
+        <h4><span class="ic">🤰</span>언제부터?</h4>
+        <ul>
+          <li>임신 중 '임신 등록'으로 신청 가능</li>
+          <li>출생 후 자녀 주민번호로 실명 전환</li>
+          <li class="warn">순번은 '등록일' 기준 → 빠를수록 유리</li>
+        </ul>
+        <p class="src"><a href="https://www.childcare.go.kr/?menuno=172" target="_blank" rel="noopener">출처 · 아이사랑</a> · 운영방식은 1566-3232 재확인 권장</p>
+      </div>
+      <div class="card">
+        <h4><span class="ic">📅</span>꼭 기억할 점</h4>
+        <ul>
+          <li><b>3월 신학기</b>에 결원이 가장 많음</li>
+          <li>등록 알림 후 <b>7일 내 연장</b> 안 하면 자동취소</li>
+          <li>취소 시 3개월까지 복구 가능</li>
+        </ul>
+        <p class="src"><a href="https://www.childcare.go.kr/?menuno=173" target="_blank" rel="noopener">출처 · 아이사랑 유의사항</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 신청 절차 ===== -->
+<section class="block" id="steps">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How to</span>
+      <h2>신청 5단계</h2>
+      <p>아이사랑에서 이 순서로 진행돼요.</p>
+    </div>
+    <div class="step-list">
+      <div class="step"><h4>아동 등록</h4><p>아이사랑 회원가입·본인인증 후 아동 정보(임신 등록 포함)를 등록</p></div>
+      <div class="step"><h4>어린이집 검색·선택</h4><p>광진구·동·유형으로 검색해 희망 어린이집을 고름</p></div>
+      <div class="step"><h4>등록대기 신청</h4><p>최대 3곳까지 등록대기(예약) 신청</p></div>
+      <div class="step"><h4>우선순위 확정·서류</h4><p>어린이집이 우선순위로 대상자 확정, 필요 시 증빙서류 제출</p></div>
+      <div class="step"><h4>최종 등록</h4><p>결원 발생 시 순번대로 등록 처리 → 입소</p></div>
+    </div>
+    <p class="src" style="margin-top:12px;font-size:.84rem;color:var(--ink-soft);">출처 · <a href="https://www.childcare.go.kr/?menuno=169" target="_blank" rel="noopener">아이사랑 입소대기 신청 절차</a></p>
+  </div>
+</section>
+
+<!-- ===== 우선순위 점수 ===== -->
+<section class="block" id="priority">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Priority</span>
+      <h2>입소 우선순위 점수제</h2>
+      <p>점수가 높을수록, 같은 순위면 먼저 신청한 사람이 우선이에요.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>구분</th><th>배점</th><th>대표 항목</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1순위</strong></td><td><span class="money">항목당 100점</span></td><td>기초생활수급, 한부모가족 지원대상, 중증 장애아동·장애부모 자녀, 다문화가족 자녀 등</td></tr>
+          <tr><td><strong>1순위 특례 · 맞벌이</strong></td><td><span class="money">200점</span></td><td>부모 모두 취업·구직 중인 영유아 (맞벌이 가점)</td></tr>
+          <tr><td><strong>2순위</strong></td><td><span class="money">항목당 50점</span></td><td>그 밖의 한부모, 가정위탁·입양 아동, <b>형제자매가 같은 어린이집 재원</b> 등</td></tr>
+          <tr><td>3순위</td><td class="muted">일반</td><td>1·2순위에 해당하지 않는 일반 신청</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout info" style="margin-top:18px;">
+      <span class="ic">ℹ️</span>
+      <div><strong>합산 규칙</strong> — 2순위 점수가 아무리 높아도 1순위를 앞서지 못해요. 1순위 점수가 같을 때만 2순위 점수를 더해 비교하고, 그래도 동점이면 <b>등록(신청) 순서</b>로 정해집니다. 다자녀·저출산 가점은 매년 상향되니 정확한 배점은 광진구 기준으로 확인하세요.</div>
+    </div>
+    <p class="src" style="margin-top:10px;font-size:.84rem;color:var(--ink-soft);">출처 · <a href="https://www.childcare.go.kr/?menuno=174" target="_blank" rel="noopener">아이사랑 입소 우선순위</a> · <a href="https://www.eaja.or.kr/s2_4/45" target="_blank" rel="noopener">2025년 보육사업안내</a></p>
+  </div>
+</section>
+
+<!-- ===== 대기 실태 / 전략 ===== -->
+<section class="block" id="reality">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Reality &amp; Tips</span>
+      <h2>대기 실태와 전략</h2>
+      <p>특히 국공립은 경쟁이 치열해요. 전략적으로 접근하세요.</p>
+    </div>
+    <div class="compare">
+      <div class="panel bad">
+        <h4><span>📉</span>현실 (왜 미리 해야 하나)</h4>
+        <div class="item"><div class="name">국공립 대기 비율 95.9%</div><div class="desc">설립유형 중 가장 높음. 평균 대기아동 국공립 약 33명(민간의 2~3배)</div></div>
+        <div class="item"><div class="name">출산 직후 신청 → 대기 100번+ 사례</div><div class="desc">맞벌이 일반가구는 가점이 적어 국공립 입소가 특히 어려움</div></div>
+        <div class="item"><div class="name">서울 어린이집 수 감소</div><div class="desc">2024년 약 4,212곳 → 이후 감소세, 0세반 축소 전망</div></div>
+        <p class="src" style="margin-top:12px;font-size:.82rem;"><a href="https://www.fnnews.com/news/202605041914592648" target="_blank" rel="noopener">출처 · 파이낸셜뉴스(2026.5)</a> · <a href="https://www.hankyung.com/article/2025122669401" target="_blank" rel="noopener">한국경제(2025.12)</a></p>
+      </div>
+      <div class="panel good">
+        <h4><span>✅</span>전략 (이렇게 하세요)</h4>
+        <div class="item"><div class="name">임신 중 '임신 등록'으로 미리 신청</div><div class="desc">순번이 등록일 기준이라 하루라도 빨리</div></div>
+        <div class="item"><div class="name">3곳을 분산 배치</div><div class="desc">인기 국공립 1 + 현실적 가정·민간 2 식으로 안전판 확보</div></div>
+        <div class="item"><div class="name">3월 신학기를 노리기</div><div class="desc">결원이 가장 많이 나는 시기</div></div>
+        <div class="item"><div class="name">대기 중에도 더 유리한 곳으로 이동</div><div class="desc">가점·순번 관리하며 갈아타기 가능</div></div>
+        <p class="src" style="margin-top:12px;font-size:.82rem;"><a href="https://www.childcare.go.kr/?menuno=173" target="_blank" rel="noopener">출처 · 아이사랑 유의사항</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ⭐ 데이터 조회처 ===== -->
+<section class="block" id="data">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Official Data</span>
+      <h2>광진구 어린이집 데이터 직접 보기</h2>
+      <p>각 어린이집의 <b>정원·현원·유형·평가등급</b>과 광진구 통계를 공식 포털에서 바로 조회·다운로드할 수 있어요.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card src-card">
+        <span class="star">★ 추천 · 광진구 전용</span>
+        <h4><span class="ic">📊</span>광진구 어린이집 정보(표준데이터)<span class="fmt">CSV</span></h4>
+        <p>광진구청이 직접 제공. 어린이집명·유형·정원·현원·주소·전화·CCTV·통학차량·좌표까지 한 파일로. (서울 열린데이터광장)</p>
+        <a class="btn" href="https://data.seoul.go.kr/dataList/OA-20305/S/1/datasetView.do" target="_blank" rel="noopener" style="background:var(--rose);color:#fff;border-color:var(--rose);">📥 데이터 받기</a>
+      </div>
+      <div class="card src-card">
+        <span class="star" style="background:var(--sage-dark)">정원·현원·평가등급</span>
+        <h4><span class="ic">🏛️</span>어린이집정보공개포털<span class="fmt">조회</span></h4>
+        <p>보건복지부 공식 공시. 광진구로 검색해 어린이집별 정원/현원, 보육교직원, <b>평가등급</b>, CCTV, 통학차량을 확인.</p>
+        <a class="btn" href="https://info.childcare.go.kr/info_html5/pnis/search/UnitySearchSlL.jsp" target="_blank" rel="noopener">🔎 어린이집 검색</a>
+      </div>
+      <div class="card src-card">
+        <span class="star" style="background:#3b6ab0">실시간 · 국공립</span>
+        <h4><span class="ic">🏫</span>서울 보육포털 국공립 현황<span class="fmt">실시간</span></h4>
+        <p>자치구를 클릭하면 광진구 국공립 어린이집 설치 현황을 당일 기준으로 조회.</p>
+        <a class="btn" href="https://iseoul.seoul.go.kr/portal/info/chart.do" target="_blank" rel="noopener">📈 현황 보기</a>
+      </div>
+      <div class="card src-card">
+        <span class="star" style="background:var(--ink-soft)">전국 · API</span>
+        <h4><span class="ic">🗂️</span>전국어린이집표준데이터<span class="fmt">CSV/API</span></h4>
+        <p>공공데이터포털. 시도=서울, 시군구=광진구로 필터해 정원·현원·좌표 등 전 항목을 CSV/OpenAPI로 수집.</p>
+        <a class="btn" href="https://www.data.go.kr/data/15013108/standard.do" target="_blank" rel="noopener">📦 데이터셋</a>
+      </div>
+      <div class="card src-card">
+        <span class="star" style="background:var(--gold)">신청 · 대기확인</span>
+        <h4><span class="ic">📝</span>아이사랑 등록대기 신청<span class="fmt">신청</span></h4>
+        <p>실제 입소대기 신청과 내 대기순번 확인은 여기서. 최대 3곳 신청·관리.</p>
+        <a class="btn" href="https://www.childcare.go.kr/?menuno=172" target="_blank" rel="noopener">➡️ 아이사랑</a>
+      </div>
+      <div class="card src-card">
+        <span class="star" style="background:var(--rose-dark)">상담 · 광진구</span>
+        <h4><span class="ic">🤝</span>광진구육아종합지원센터<span class="fmt">상담</span></h4>
+        <p>광진구 능동로 400. 보육 상담·부모교육·장난감 대여 등. 대표 1577-0756.</p>
+        <a class="btn" href="https://www.gjcare.go.kr/" target="_blank" rel="noopener">🏠 센터 홈페이지</a>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:22px;">
+      <span class="ic">💡</span>
+      <div><strong>전체 목록표가 필요하면</strong> — 위 ‘광진구 어린이집 정보(표준데이터)’ CSV를 받아주시면, 산후조리원처럼 <b>유형별 탭 + 정원·현원·위치·전화로 정리한 검색 가능한 목록</b>으로 이 사이트에 추가해 드릴 수 있어요.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="section-head"><span class="kicker">FAQ</span><h2>자주 묻는 질문</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>어린이집 입소대기는 언제부터 신청하나요?</summary>
+        <div class="faq-a">아이사랑 포털에서 <b>임신 중(임신 등록)부터</b> 신청할 수 있고, 순번은 등록일 기준이라 빠를수록 유리해요. 국공립은 대기가 길어 임신 중 신청을 권장합니다. 출생 후 자녀 주민번호로 실명 전환합니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>몇 개 어린이집까지 동시에 신청할 수 있나요?</summary>
+        <div class="faq-a">미재원 아동은 <b>최대 3곳</b>, 이미 다니는 재원 아동은 최대 2곳까지 동시 등록대기할 수 있어요. 대기 중 신청 어린이집을 바꿀 수도 있습니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>맞벌이면 우선순위에서 유리한가요?</summary>
+        <div class="faq-a">네. 부모가 모두 취업·구직 중이면 <b>1순위 200점</b> 가점이 있어 유리해요. 다만 같은 1순위가 몰리면 결국 <b>신청(등록) 순서</b>로 정해지므로 일찍 신청하는 게 중요합니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>광진구 어린이집의 정원·현원은 어디서 보나요?</summary>
+        <div class="faq-a"><a href="https://info.childcare.go.kr/info_html5/pnis/search/UnitySearchSlL.jsp" target="_blank" rel="noopener">어린이집정보공개포털</a>에서 광진구로 검색하면 어린이집별 정원/현원·평가등급을 볼 수 있고, <a href="https://data.seoul.go.kr/dataList/OA-20305/S/1/datasetView.do" target="_blank" rel="noopener">광진구 표준데이터 CSV</a>로 전체를 한 번에 받을 수 있어요.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="brand"><span class="logo">🤰</span> 임신 가이드</div>
+    <p>출처: 아이사랑·어린이집정보공개포털·서울 열린데이터광장·광진구육아종합지원센터 · 제도·수치는 변동될 수 있으니 신청 전 공식 출처에서 확인하세요.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"광진구 어린이집 입소대기는 언제부터 신청하나요?","acceptedAnswer":{"@type":"Answer","text":"아이사랑 포털에서 임신 중(임신 등록)부터 신청할 수 있으며, 대기 순번은 등록일 기준이라 빠를수록 유리합니다. 국공립은 대기가 길어 임신 중 신청을 권장합니다."}},
+    {"@type":"Question","name":"어린이집은 몇 곳까지 동시에 입소대기 신청할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"미재원 아동은 최대 3곳, 재원 아동은 최대 2곳까지 동시에 등록대기 신청할 수 있습니다."}},
+    {"@type":"Question","name":"맞벌이면 어린이집 우선순위에서 유리한가요?","acceptedAnswer":{"@type":"Answer","text":"부모가 모두 취업·구직 중이면 1순위 200점 가점이 있어 유리합니다. 동일 순위가 몰리면 신청 등록 순서로 정해지므로 일찍 신청하는 것이 중요합니다."}}
+  ]
+}
+</script>
+<script src="analytics.js" defer></script>
+</body>
+</html>

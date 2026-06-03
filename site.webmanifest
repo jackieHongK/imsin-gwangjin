@@ -1,0 +1,13 @@
+{
+  "name": "광진구 임신·출산 가이드",
+  "short_name": "임신가이드",
+  "description": "광진구 산후조리원·출산 복지정책·임신 주차별 체크리스트",
+  "lang": "ko-KR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf9f6",
+  "theme_color": "#d96e85",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
