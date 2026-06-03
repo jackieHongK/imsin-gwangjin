@@ -52,6 +52,26 @@
   .lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;background:none;border:0;color:#fff;cursor:pointer;padding:0 18px;opacity:.8}
   .lb-nav:hover{opacity:1}
   .lb-prev{left:6px}.lb-next{right:6px}
+  /* 보기/정렬 툴바 */
+  .list-toolbar{display:flex;gap:16px 22px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .ctrl{display:inline-flex;align-items:center;gap:8px}
+  .seg-label{font-size:.82rem;color:var(--ink-soft);font-weight:800}
+  .seg{display:inline-flex;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:3px;box-shadow:var(--shadow);gap:2px;flex-wrap:wrap}
+  .seg button{border:0;background:none;font-family:inherit;font-weight:700;font-size:.86rem;color:var(--ink-soft);padding:7px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}
+  .seg button:hover{color:var(--rose-dark)}
+  .seg button.active{background:var(--rose);color:#fff}
+  .seg.sort button.active{background:var(--sage);color:#fff}
+  /* 표 뷰 */
+  .list-table{width:100%;border-collapse:collapse;background:var(--white);font-size:.92rem;min-width:640px}
+  .list-table thead th{background:var(--rose-soft);color:var(--rose-dark);text-align:left;padding:11px 14px;white-space:nowrap;font-weight:700}
+  .list-table th.th-sort{cursor:pointer;user-select:none}
+  .list-table th.th-sort:hover{filter:brightness(.95)}
+  .list-table th.th-sort.on{background:var(--rose);color:#fff}
+  .list-table tbody td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:middle}
+  .list-table tbody tr:hover{background:#fcf6f7}
+  .row-links{display:flex;gap:4px}
+  .ic-btn{display:inline-grid;place-items:center;width:30px;height:30px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-size:.95rem}
+  .ic-btn:hover{border-color:var(--rose);background:var(--rose-soft)}
 </style>
 </head>
 <body>
@@ -99,6 +119,22 @@
     </div>
 
     <div class="gu-tabs" id="guTabs"></div>
+    <div class="list-toolbar">
+      <div class="ctrl"><span class="seg-label">보기</span>
+        <div class="seg" id="viewSeg">
+          <button data-view="card" class="active">▦ 카드</button>
+          <button data-view="table">▤ 표</button>
+        </div>
+      </div>
+      <div class="ctrl"><span class="seg-label">정렬</span>
+        <div class="seg sort" id="sortSeg">
+          <button data-sort="default" class="active">기본</button>
+          <button data-sort="name">이름순</button>
+          <button data-sort="priceAsc">가격 낮은순</button>
+          <button data-sort="priceDesc">가격 높은순</button>
+        </div>
+      </div>
+    </div>
     <div id="results"></div>
   </div>
 </section>
@@ -188,24 +224,86 @@
   var results = document.getElementById('results');
   var tabsBox = document.getElementById('guTabs');
   var activeGu = order[0];
+  var viewMode = 'card', sortMode = 'default';
+  var curList = [], curTitle = '', curEmpty = '';
 
-  function renderGu(gu){
-    var list = byGu[gu];
-    results.innerHTML =
-      '<div class="gu-title">'+esc(gu)+' <span class="badge">'+list.length+'곳</span></div>'+
-      '<div class="center-grid">'+ list.map(cardHTML).join('') +'</div>';
+  // ---- 정렬 ----
+  function repPrice(c){
+    var n = parseInt(String(c.normal||'').replace(/[^0-9]/g,''),10) || 0;
+    if(!n) n = parseInt(String(c.special||'').replace(/[^0-9]/g,''),10) || 0;
+    return n;
+  }
+  function applySort(list){
+    var a = list.slice();
+    if(sortMode==='name') a.sort(function(x,y){ return x.name.localeCompare(y.name,'ko'); });
+    else if(sortMode==='priceAsc') a.sort(function(x,y){ return (repPrice(x)||1e9)-(repPrice(y)||1e9); });
+    else if(sortMode==='priceDesc') a.sort(function(x,y){ return (repPrice(y)||-1)-(repPrice(x)||-1); });
+    else a.sort(function(x,y){ return x.no-y.no; });
+    return a;
   }
 
+  // ---- 표(테이블) 렌더 ----
+  function priceCell(v){
+    return v ? '<span class="money">'+v+'<small style="font-weight:600;color:var(--ink-soft)">만</small></span>'
+             : '<span class="muted">—</span>';
+  }
+  function rowHTML(c){
+    var h = homeLink(c);
+    return '<tr>'+
+      '<td><b>'+esc(c.name)+'</b><div class="muted" style="font-size:.8rem">No.'+c.no+'</div></td>'+
+      '<td class="muted">'+esc(c.gu)+'</td>'+
+      '<td>'+priceCell(c.normal)+'</td>'+
+      '<td>'+priceCell(c.special)+'</td>'+
+      '<td class="muted" style="white-space:nowrap">'+esc(c.tel)+'</td>'+
+      '<td><div class="row-links">'+
+        '<a class="ic-btn" title="전화" href="tel:'+c.tel.replace(/-/g,'')+'">📞</a>'+
+        '<a class="ic-btn" title="네이버 지도" href="'+naverMap(c)+'" target="_blank" rel="noopener">📍</a>'+
+        '<a class="ic-btn" title="네이버 검색" href="'+naverSearch(c)+'" target="_blank" rel="noopener">🔎</a>'+
+        '<a class="ic-btn" title="'+esc(h.title)+'" href="'+h.href+'" target="_blank" rel="noopener">🌐</a>'+
+      '</div></td>'+
+    '</tr>';
+  }
+  function th(key,label){
+    var isPrice = key==='priceAsc';
+    var on = isPrice ? (sortMode==='priceAsc'||sortMode==='priceDesc') : (sortMode===key);
+    var ar = on ? (sortMode==='priceDesc' ? ' ↓' : ' ↑') : '';
+    return '<th class="th-sort'+(on?' on':'')+'" data-s="'+key+'">'+esc(label)+ar+'</th>';
+  }
+
+  // ---- 공통 렌더(뷰/정렬 반영) ----
+  function renderList(){
+    if(!curList.length){ results.innerHTML = '<div class="empty-msg">'+(curEmpty||'결과가 없어요.')+'</div>'; return; }
+    var list = applySort(curList);
+    var head = '<div class="gu-title">'+curTitle+' <span class="badge">'+curList.length+'곳</span></div>';
+    if(viewMode==='table'){
+      results.innerHTML = head +
+        '<div class="table-wrap"><table class="list-table"><thead><tr>'+
+          th('name','이름')+'<th>구</th>'+th('priceAsc','일반실')+'<th>특실</th><th>전화</th><th>링크</th>'+
+        '</tr></thead><tbody>'+ list.map(rowHTML).join('') +'</tbody></table></div>';
+    } else {
+      results.innerHTML = head + '<div class="center-grid">'+ list.map(cardHTML).join('') +'</div>';
+    }
+  }
+
+  function renderGu(gu){ curList = byGu[gu]; curTitle = esc(gu); curEmpty = ''; renderList(); }
   function renderSearch(q){
-    q = q.trim().toLowerCase();
-    var hits = data.filter(function(c){
-      return (c.name+' '+c.addr+' '+c.gu).toLowerCase().indexOf(q) !== -1;
-    });
-    if(!hits.length){ results.innerHTML = '<div class="empty-msg">‘'+esc(q)+'’ 검색 결과가 없어요.</div>'; return; }
-    results.innerHTML =
-      '<div class="gu-title">🔎 검색결과 <span class="badge">'+hits.length+'곳</span></div>'+
-      '<div class="center-grid">'+ hits.map(cardHTML).join('') +'</div>';
+    var qq = q.trim().toLowerCase();
+    curList = data.filter(function(c){ return (c.name+' '+c.addr+' '+c.gu).toLowerCase().indexOf(qq)!==-1; });
+    curTitle = '🔎 검색결과'; curEmpty = '‘'+esc(q.trim())+'’ 검색 결과가 없어요.';
+    renderList();
   }
+
+  // ---- 뷰/정렬 컨트롤 ----
+  function setView(m){ viewMode=m; document.querySelectorAll('#viewSeg button').forEach(function(b){ b.classList.toggle('active', b.dataset.view===m); }); renderList(); }
+  function setSort(m){ sortMode=m; document.querySelectorAll('#sortSeg button').forEach(function(b){ b.classList.toggle('active', b.dataset.sort===m); }); renderList(); }
+  document.getElementById('viewSeg').addEventListener('click', function(e){ var b=e.target.closest('button'); if(b) setView(b.dataset.view); });
+  document.getElementById('sortSeg').addEventListener('click', function(e){ var b=e.target.closest('button'); if(b) setSort(b.dataset.sort); });
+  results.addEventListener('click', function(e){
+    var thEl=e.target.closest('.th-sort'); if(!thEl) return;
+    var s=thEl.dataset.s;
+    if(s==='priceAsc') setSort(sortMode==='priceAsc' ? 'priceDesc' : 'priceAsc');
+    else setSort(s);
+  });
 
   // 탭 생성
   order.forEach(function(gu){
