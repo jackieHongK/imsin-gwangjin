@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전국 산후조리원 475곳 비교 | 시도·시군구별 간호인력·정원 (2026 최신)</title>
+<meta name="description" content="전국 17개 시도·시군구별 산후조리원 475곳을 간호사 1인당 신생아 수, 신생아·산모 정원, 간호인력으로 비교. 실사용자 선택 기준(간호인력·감염관리·모유수유 케어) 체크리스트 포함. 출처: 행정안전부 인허가 데이터(매일 갱신)." />
+<meta name="keywords" content="전국 산후조리원, 산후조리원 비교, 산후조리원 간호인력, 간호사 신생아 비율, 산후조리원 정원, 지역별 산후조리원, 산후조리원 고르는 법, 산후조리원 체크리스트" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<link rel="canonical" href="https://jackiehongk.github.io/imsin-gwangjin/jorwon-national.html" />
+<meta property="og:title" content="전국 산후조리원 475곳 비교 | 간호인력·정원·체크리스트" />
+<meta property="og:description" content="시도·시군구별 산후조리원을 간호인력·정원으로 비교하고, 실사용자 선택 기준 체크리스트까지." />
+<meta property="og:url" content="https://jackiehongk.github.io/imsin-gwangjin/jorwon-national.html" />
+<meta property="og:image" content="https://jackiehongk.github.io/imsin-gwangjin/og-image.svg" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="styles.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"임신·출산 가이드","item":"https://jackiehongk.github.io/imsin-gwangjin/"},
+ {"@type":"ListItem","position":2,"name":"산후조리원 비교","item":"https://jackiehongk.github.io/imsin-gwangjin/seoul-compare.html"},
+ {"@type":"ListItem","position":3,"name":"전국 산후조리원 비교","item":"https://jackiehongk.github.io/imsin-gwangjin/jorwon-national.html"}
+]}
+</script>
+<style>
+  .backlink{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink-soft);margin-bottom:8px}
+  .sido-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .sido-tab{border:1px solid var(--line);background:var(--white);color:var(--ink-soft);font-family:inherit;font-weight:700;
+    font-size:.9rem;padding:7px 13px;border-radius:999px;cursor:pointer}
+  .sido-tab .c{color:var(--sage-dark);margin-left:5px;font-size:.8rem}
+  .sido-tab.active{background:var(--sage);border-color:var(--sage);color:#fff}
+  .sido-tab.active .c{color:#dff0e6}
+  .sg-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+  .sg-chip{border:1px solid var(--line);background:var(--white);color:var(--ink-soft);font-family:inherit;font-weight:600;
+    font-size:.82rem;padding:5px 11px;border-radius:8px;cursor:pointer}
+  .sg-chip .c{color:var(--rose);margin-left:4px;font-size:.74rem}
+  .sg-chip.active{background:var(--rose);border-color:var(--rose);color:#fff}
+  .sg-chip.active .c{color:#ffe1e8}
+  .nat-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .search-box{flex:1;min-width:200px;position:relative}
+  .search-box input{width:100%;font-family:inherit;font-size:.96rem;padding:11px 14px 11px 38px;border:1px solid var(--line);border-radius:999px;background:var(--white);box-shadow:var(--shadow)}
+  .search-box input:focus{outline:none;border-color:var(--sage)}
+  .search-box::before{content:"🔍";position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.6}
+  .seg{display:inline-flex;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:3px;box-shadow:var(--shadow);gap:2px;flex-wrap:wrap}
+  .seg button{border:0;background:none;font-family:inherit;font-weight:700;font-size:.84rem;color:var(--ink-soft);padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+  .seg button.active{background:var(--sage);color:#fff}
+  .nat-table{width:100%;border-collapse:collapse;background:var(--white);font-size:.9rem;min-width:760px}
+  .nat-table thead th{background:var(--sage-soft);color:var(--sage-dark);text-align:left;padding:10px 12px;white-space:nowrap;font-weight:700}
+  .nat-table th.s{cursor:pointer;user-select:none}
+  .nat-table th.s.on{background:var(--sage);color:#fff}
+  .nat-table tbody td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:middle}
+  .nat-table tbody tr:hover{background:#f4faf6}
+  .nat-table td.num{text-align:center;font-weight:700}
+  .ratio{display:inline-block;font-weight:800;font-size:.86rem;padding:2px 9px;border-radius:999px}
+  .ratio.good{background:var(--sage-soft);color:var(--sage-dark)}
+  .ratio.mid{background:var(--cream-2);color:var(--ink)}
+  .ratio.warn{background:#fdecef;color:var(--rose-dark)}
+  .row-links{display:flex;gap:4px}
+  .ic-btn{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:.9rem}
+  .ic-btn:hover{border-color:var(--sage);background:var(--sage-soft)}
+  .legend{font-size:.85rem;color:var(--ink-soft);margin-top:10px;display:flex;gap:14px;flex-wrap:wrap}
+  .legend .ratio{font-size:.76rem}
+  /* 팩터 체크리스트 */
+  .factor-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px;overflow:hidden}
+  .factor-wrap>summary{cursor:pointer;list-style:none;padding:18px 22px;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .factor-wrap>summary::-webkit-details-marker{display:none}
+  .factor-wrap>summary::after{content:"+";color:var(--sage);font-size:1.5rem;font-weight:400}
+  .factor-wrap[open]>summary::after{content:"–"}
+  .factor-body{padding:0 22px 22px}
+  .fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .fcard{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px}
+  .fcard h4{font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .fcard ul{list-style:none;font-size:.9rem}
+  .fcard li{padding:4px 0 4px 18px;position:relative;color:var(--ink)}
+  .fcard li::before{content:"•";position:absolute;left:2px;color:var(--sage-dark)}
+  .fcard li b{color:var(--rose-dark)}
+  .fcard.warn li::before{content:"⚠";color:var(--rose-dark);font-size:.8rem}
+  .imp{font-size:.68rem;font-weight:800;padding:1px 6px;border-radius:5px;margin-left:auto}
+  .imp.h{background:#fdecef;color:var(--rose-dark)}.imp.m{background:var(--cream-2);color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span class="logo">🤰</span> 임신 가이드</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <nav class="gnb">
+      <div class="gnb-group">
+        <button class="gnb-top" aria-expanded="false">임신·출산 정보 <span class="chev">▾</span></button>
+        <div class="gnb-menu">
+          <span class="mlabel">시기별 가이드</span>
+          <a href="index.html#timeline">주차별 체크리스트</a>
+          <a href="index.html#caution">임산부 주의사항</a>
+          <span class="mlabel">건강·식이</span>
+          <a href="index.html#food">음식 (좋은·조심할)</a>
+          <a href="index.html#supplements">엽산·철분 복용</a>
+          <a href="index.html#meds">약품 주의</a>
+          <a href="index.html#nausea">입덧 대응</a>
+          <a href="index.html#exercise">운동</a>
+          <a href="index.html#husband-food">추천 음식·레시피</a>
+          <span class="mlabel">지원·생활</span>
+          <a href="index.html#welfare">복지정책 (국가·서울·광진)</a>
+          <a href="gwangjin-daycare.html">어린이집 입소대기</a>
+          <a href="index.html#partner">남편 역할</a>
+          <a href="index.html#faq">자주 묻는 질문</a>
+        </div>
+      </div>
+      <div class="gnb-group cmp">
+        <button class="gnb-top" aria-expanded="false">산후조리원 비교 <span class="chev">▾</span></button>
+        <div class="gnb-menu">
+          <a href="jorwon-national.html">전국 산후조리원 (시도·시군구)</a>
+          <a href="seoul-sanhujoriwon.html">서울 전체 112곳 목록·사진</a>
+          <a href="seoul-compare.html">서울 구별 가격·후기 비교</a>
+          <a href="index.html#centers">광진구 산후조리원</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:46px 0 32px;">
+  <div class="wrap">
+    <a class="backlink" href="seoul-compare.html">← 서울 구별 비교</a>
+    <h1 style="font-size:2.1rem;">전국 산후조리원 <span class="accent">시도·시군구별 비교</span></h1>
+    <p class="lead">전국 17개 시도 영업중 <b id="hTotal">–</b>곳을 <b>간호사 1인당 신생아 수·정원·간호인력</b> 등 실사용자 기준으로 비교하세요. 시도를 고르고 시군구로 좁혀 볼 수 있어요.</p>
+    <div class="hero-badges">
+      <span class="badge">🏥 전국 <b id="hCnt">–</b>곳</span>
+      <span class="badge">👩‍⚕️ 간호인력 1인당 신생아</span>
+      <span class="badge">📄 행안부 인허가 <b>매일 갱신</b></span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="margin-top:24px;">
+  <div class="disclaimer">
+    <strong>⚠️ 안내</strong> · 시설·정원·간호인력 데이터 출처는 <a href="https://www.localdata.go.kr" target="_blank" rel="noopener">행정안전부 지방행정 인허가 데이터(산후조리업)</a>이며 <b>영업중</b> 기준입니다.
+    <b>가격</b>은 이 데이터에 포함되지 않습니다(서울은 <a href="seoul-compare.html">구별 비교</a>에서 2025 공식요금 제공, 전국 가격은 추후 보강 예정). 정원·인력은 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
+  </div>
+</div>
+
+<section class="block" style="padding-top:30px;">
+  <div class="wrap">
+    <!-- 실사용자 팩터 체크리스트 -->
+    <details class="factor-wrap" open>
+      <summary>📋 산후조리원 고르는 핵심 체크리스트 <span style="font-weight:500;color:var(--ink-soft);font-size:.85rem">실사용자(맘카페·후기) 기준</span></summary>
+      <div class="factor-body">
+        <p style="color:var(--ink-soft);font-size:.93rem;margin-bottom:14px">실제 산모들이 가장 중요하게 보는 순서는 <b>① 신생아실 간호인력 → ② 감염·위생 → ③ 모유수유 케어 → ④ 가격 → ⑤ 위치</b>입니다. 공통 조언: <b>“인테리어 사진보다 간호 서비스 후기를 보라.”</b></p>
+        <div class="fcols">
+          <div class="fcard">
+            <h4>📊 숫자로 따질 것 <span class="imp h">정량</span></h4>
+            <ul>
+              <li><b>간호사 1인당 신생아 수</b> — 가장 중요. 적을수록 집중 케어 (아래 표에서 비교)</li>
+              <li>정원 규모 (소수정예 vs 대형)</li>
+              <li>소아과 회진 주 몇 회 (보통 1~2회)</li>
+              <li>신생아 CCTV·캠 24시간 여부</li>
+              <li>가장 가까운 대형병원 거리(응급 이송)</li>
+              <li>가격(2주/3주)·마사지 횟수·<b>환불 약관</b></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <h4>💬 후기로 볼 것 <span class="imp h">정성</span></h4>
+            <ul>
+              <li><b>감염·위생</b> — 젖병 신생아별 분리, 소독 주기 (집단감염 후기 거르기)</li>
+              <li><b>모유수유 케어</b> — 가슴마사지 전문 인력 상주 여부</li>
+              <li>신생아실 간호사 경력·친절·태도</li>
+              <li>식사 질(맛·식자재 신뢰)</li>
+              <li>면회 정책·남편 상주 가능 여부</li>
+              <li>조동(조리원 동기) 분위기</li>
+            </ul>
+          </div>
+          <div class="fcard warn">
+            <h4>🚩 거르는 신호 <span class="imp h">지뢰</span></h4>
+            <ul>
+              <li>신생아실을 조무사·기간제만으로 운영</li>
+              <li>집단감염(로타바이러스 등) 이력·소독 부실</li>
+              <li><b>모유수유·24시간 모자동실 강요</b>로 산모가 못 쉼</li>
+              <li>신생아실이 밀폐·커튼형이라 아기를 못 봄</li>
+              <li>시설은 화려한데 간호 후기는 나쁨</li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <h4>🙋 방문 때 꼭 물어볼 것 <span class="imp m">투어</span></h4>
+            <ul>
+              <li>간호사 1인당 신생아 몇 명? 신생아실 인력 구성은?</li>
+              <li>소독 주기·젖병 분리 사용·감염 시 고지 체계?</li>
+              <li>모자동실 의무/선택? 밤에 신생아실 맡기고 숙면 가능?</li>
+              <li>가슴마사지 전문 인력 상주?</li>
+              <li>2·3주 비용/마사지 포함 여부/환불 %·면회 정책?</li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <h4>👶 상황별 우선순위 <span class="imp m">참고</span></h4>
+            <ul>
+              <li><b>초산모</b> — 모유수유·신생아 응급·목욕 교육 가치 ↑ (“쉬었다 배우고 나와라”)</li>
+              <li><b>경산모</b> — 첫째 돌봄 병행 → 산후도우미 선호 경향</li>
+              <li><b>직장맘/예산</b> — 가성비·기간 단축, “1~2주라도 가라”</li>
+              <li>공통 — 비싼 곳보다 <b>산모·아기가 편안한 곳</b></li>
+            </ul>
+          </div>
+        </div>
+        <p class="src" style="margin-top:14px;font-size:.82rem;color:var(--ink-soft)">출처 · 맘카페·네이버 블로그 후기·비교 가이드(비행테라스·베이비뉴스·똑닥)·블라인드·KCI 모유수유 저해요인 논문 등 종합. 정량 권장치는 가이드 기준(법정 표준 아님).</p>
+      </div>
+    </details>
+
+    <div class="section-head" style="margin-bottom:20px">
+      <span class="kicker">Nationwide</span>
+      <h2>지역으로 좁혀 비교하기</h2>
+      <p>시도 → 시군구 순으로 선택하면 해당 지역 산후조리원이 표로 정렬됩니다.</p>
+    </div>
+
+    <div class="sido-tabs" id="sidoTabs"></div>
+    <div class="sg-chips" id="sgChips"></div>
+
+    <div class="nat-toolbar">
+      <div class="search-box"><input id="search" type="search" placeholder="조리원 이름으로 전국 검색" autocomplete="off" /></div>
+      <div class="seg" id="sortSeg">
+        <button data-sort="ratioAsc" class="active">간호집중순</button>
+        <button data-sort="capDesc">정원 큰순</button>
+        <button data-sort="name">이름순</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="nat-table">
+        <thead>
+          <tr>
+            <th>상호 · 시군구</th>
+            <th class="s num" data-s="capDesc">신생아<br>정원</th>
+            <th class="num">간호사</th>
+            <th class="num">조무사</th>
+            <th class="s num" data-s="ratioAsc">1인당<br>신생아 ⓘ</th>
+            <th class="num">영양사</th>
+            <th class="num">개원</th>
+            <th>링크</th>
+          </tr>
+        </thead>
+        <tbody id="natBody"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span>간호인력 1인당 신생아 =</span>
+      <span><span class="ratio good">1:1.5↓</span> 집중케어</span>
+      <span><span class="ratio mid">1:1.5~2.5</span> 보통</span>
+      <span><span class="ratio warn">1:2.5↑</span> 확인필요</span>
+      <span style="color:var(--ink-soft)">· 간호인력 = 간호사 + 간호조무사</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="brand"><span class="logo">🤰</span> 임신 가이드</div>
+    <p>시설·인력·정원: 행정안전부 인허가 데이터(영업중, 매일 갱신) · 정원·인력은 신고 기준 · 결정 전 직접 확인하세요.</p>
+  </div>
+</footer>
+
+<script src="national-data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var data = NATIONAL_CENTERS;
+  var bySido={}, sidoOrder=[];
+  data.forEach(function(c){ if(!bySido[c.sd]){bySido[c.sd]=[];sidoOrder.push(c.sd);} bySido[c.sd].push(c); });
+  document.getElementById('hTotal').textContent = data.length;
+  document.getElementById('hCnt').textContent = data.length;
+
+  var activeSido = sidoOrder[0], activeSg = null, sortMode='ratioAsc', searchQ='';
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function ratio(c){ var s=c.ns+c.na; return (s>0 && c.ci>0) ? c.ci/s : null; }
+  function naverMap(c){ return 'https://map.naver.com/p/search/'+encodeURIComponent(c.n+' '+c.sg); }
+  function naverSearch(c){ return 'https://search.naver.com/search.naver?query='+encodeURIComponent(c.n+' 산후조리원'); }
+
+  function curList(){
+    var list = activeSg ? bySido[activeSido].filter(function(c){return c.sg===activeSg;}) : bySido[activeSido].slice();
+    if(searchQ){ var q=searchQ.toLowerCase(); list = data.filter(function(c){return (c.n+' '+c.sd+' '+c.sg).toLowerCase().indexOf(q)!==-1;}); }
+    return list;
+  }
+  function sortList(list){
+    var a=list.slice();
+    if(sortMode==='name') a.sort(function(x,y){return x.n.localeCompare(y.n,'ko');});
+    else if(sortMode==='capDesc') a.sort(function(x,y){return (y.ci||0)-(x.ci||0);});
+    else { // ratioAsc: 비율 낮은(집중) 순, N/A는 뒤로
+      a.sort(function(x,y){ var rx=ratio(x), ry=ratio(y); if(rx==null&&ry==null)return 0; if(rx==null)return 1; if(ry==null)return -1; return rx-ry; });
+    }
+    return a;
+  }
+  function ratioCell(c){
+    var r=ratio(c); if(r==null) return '<span class="muted">–</span>';
+    var cls=r<=1.5?'good':(r<=2.5?'mid':'warn');
+    return '<span class="ratio '+cls+'">1:'+r.toFixed(1)+'</span>';
+  }
+  function rowHTML(c){
+    return '<tr>'+
+      '<td><b>'+esc(c.n)+'</b><div class="muted" style="font-size:.8rem">'+esc(c.sd)+' '+esc(c.sg)+'</div></td>'+
+      '<td class="num">'+(c.ci||'–')+'</td>'+
+      '<td class="num">'+(c.ns||'–')+'</td>'+
+      '<td class="num">'+(c.na||'–')+'</td>'+
+      '<td class="num">'+ratioCell(c)+'</td>'+
+      '<td class="num">'+(c.nd||'–')+'</td>'+
+      '<td class="num muted" style="font-weight:600">'+(c.y||'–')+'</td>'+
+      '<td><div class="row-links">'+
+        (c.t?'<a class="ic-btn" title="전화 '+esc(c.t)+'" href="tel:'+c.t.replace(/-/g,'')+'">📞</a>':'')+
+        '<a class="ic-btn" title="네이버 지도" href="'+naverMap(c)+'" target="_blank" rel="noopener">📍</a>'+
+        '<a class="ic-btn" title="네이버 검색" href="'+naverSearch(c)+'" target="_blank" rel="noopener">🔎</a>'+
+      '</div></td>'+
+    '</tr>';
+  }
+  function render(){
+    var list=sortList(curList());
+    var body=document.getElementById('natBody');
+    if(!list.length){ body.innerHTML='<tr><td colspan="8" style="text-align:center;padding:30px;color:var(--ink-soft)">결과가 없어요.</td></tr>'; return; }
+    body.innerHTML = list.map(rowHTML).join('');
+    // 정렬 헤더 표시
+    document.querySelectorAll('.nat-table th.s').forEach(function(th){ th.classList.toggle('on', th.dataset.s===sortMode); });
+  }
+
+  // 시도 탭
+  var sidoTabs=document.getElementById('sidoTabs');
+  sidoOrder.forEach(function(sd){
+    var b=document.createElement('button');
+    b.className='sido-tab'+(sd===activeSido?' active':'');
+    b.innerHTML=esc(sd)+'<span class="c">'+bySido[sd].length+'</span>';
+    b.addEventListener('click',function(){
+      document.getElementById('search').value=''; searchQ='';
+      sidoTabs.querySelectorAll('.sido-tab').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active'); activeSido=sd; activeSg=null; renderChips(); render();
+    });
+    sidoTabs.appendChild(b);
+  });
+
+  // 시군구 칩
+  var sgChips=document.getElementById('sgChips');
+  function renderChips(){
+    var m={}, order=[];
+    bySido[activeSido].forEach(function(c){ if(!m[c.sg]){m[c.sg]=0;order.push(c.sg);} m[c.sg]++; });
+    order.sort(function(a,b){return a.localeCompare(b,'ko');});
+    var html='<button class="sg-chip'+(activeSg===null?' active':'')+'" data-g="">전체<span class="c">'+bySido[activeSido].length+'</span></button>';
+    html+=order.map(function(g){return '<button class="sg-chip'+(activeSg===g?' active':'')+'" data-g="'+esc(g)+'">'+esc(g)+'<span class="c">'+m[g]+'</span></button>';}).join('');
+    sgChips.innerHTML=html;
+    sgChips.querySelectorAll('.sg-chip').forEach(function(ch){
+      ch.addEventListener('click',function(){
+        document.getElementById('search').value=''; searchQ='';
+        sgChips.querySelectorAll('.sg-chip').forEach(function(x){x.classList.remove('active');});
+        ch.classList.add('active'); activeSg=ch.dataset.g||null; render();
+      });
+    });
+  }
+
+  // 정렬
+  document.getElementById('sortSeg').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    sortMode=b.dataset.sort;
+    this.querySelectorAll('button').forEach(function(x){x.classList.toggle('active',x.dataset.sort===sortMode);});
+    render();
+  });
+  document.querySelector('.nat-table thead').addEventListener('click',function(e){
+    var th=e.target.closest('th.s'); if(!th) return;
+    sortMode=th.dataset.s;
+    document.querySelectorAll('#sortSeg button').forEach(function(x){x.classList.toggle('active',x.dataset.sort===sortMode);});
+    render();
+  });
+  // 검색
+  var t;
+  document.getElementById('search').addEventListener('input',function(e){
+    clearTimeout(t); var q=e.target.value;
+    t=setTimeout(function(){ searchQ=q.trim(); render(); },180);
+  });
+
+  renderChips(); render();
+})();
+</script>
+<script src="nav.js" defer></script>
+<script src="analytics.js" defer></script>
+</body>
+</html>
