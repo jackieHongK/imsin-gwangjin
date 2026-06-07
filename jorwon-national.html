@@ -152,7 +152,7 @@
 <div class="wrap" style="margin-top:24px;">
   <div class="disclaimer">
     <strong>⚠️ 안내</strong> · 시설·정원·간호인력 데이터 출처는 <a href="https://www.localdata.go.kr" target="_blank" rel="noopener">행정안전부 지방행정 인허가 데이터(산후조리업)</a>이며 <b>영업중</b> 기준입니다.
-    <b>가격(2주)</b> 출처 — <span class="pyr y25">’25</span> 서울은 <b>2025.6 공식요금</b>, <span class="pyr y23">’23</span> 그 외 지역은 <b>보건복지부 전국 현황(2023.12)</b>입니다(전화·상호 매칭). 정원·인력은 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
+    <b>가격(2주, 일반실/특실)</b> 출처 — <b>보건복지부 전국 산후조리원 현황 2025.12 기준</b>(전화·상호로 매칭). 정원·간호인력은 행정안전부 인허가 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
   </div>
 </div>
 
@@ -282,11 +282,10 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="brand"><span class="logo">💗</span> 10달 뒤 건강하게 만나자</div>
-    <p>시설·인력·정원: 행정안전부 인허가 데이터(영업중, 매일 갱신) · 가격: 서울 2025.6/그 외 복지부 2023.12 · 후기: 웹 요약 · 결정 전 직접 확인하세요.</p>
+    <p>시설·인력·정원: 행정안전부 인허가 데이터(영업중, 매일 갱신) · 가격: 보건복지부 전국 현황 2025.12 · 후기: 웹 요약 · 결정 전 직접 확인하세요.</p>
   </div>
 </footer>
 
-<script src="seoul-data.js"></script>
 <script src="price-national.js"></script>
 <script src="national-data.js"></script>
 <script src="national-reviews.js"></script>
@@ -294,25 +293,17 @@
 (function(){
   "use strict";
   var data = NATIONAL_CENTERS;
-  var SEOUL = (typeof SEOUL_CENTERS !== "undefined") ? SEOUL_CENTERS : [];
-  // 서울 2025.6 공식 가격을 전화번호(우선)·상호로 매칭
+  // 전국 가격: 보건복지부 전국 산후조리원 현황(2025.12), 전화번호(우선)·상호+시군구로 매칭
   function pdig(t){ return String(t||"").replace(/\D/g,""); }
   function pnorm(s){ return String(s).replace(/\(주\)/g,"").replace(/\(.*?\)/g,"").replace(/산후조리원/g,"").replace(/\s+/g,"").toLowerCase(); }
-  var priceByPhone={}, priceByName={};
-  SEOUL.forEach(function(c){ var d=pdig(c.tel); if(d) priceByPhone[d]={n:c.normal,s:c.special}; priceByName[pnorm(c.name)]={n:c.normal,s:c.special}; });
-  var P23 = (typeof PRICE_2023 !== "undefined") ? PRICE_2023 : {phone:{}, name:{}};
-  function priceOf(c){
-    if(c.sd==="서울"){ var ps = priceByPhone[pdig(c.t)] || priceByName[pnorm(c.n)]; if(ps) return {n:ps.n, s:ps.s, y:"25"}; }
-    var pm = P23.phone[pdig(c.t)] || P23.name[pnorm(c.n)+"|"+c.sg];
-    if(pm) return {n:pm.n, s:pm.s, y:"23"};
-    return null;
-  }
+  var PL = (typeof PRICE_LATEST !== "undefined") ? PRICE_LATEST : {y:"", phone:{}, name:{}};
+  function priceOf(c){ return PL.phone[pdig(c.t)] || PL.name[pnorm(c.n)+"|"+c.sg] || null; }
   function priceNum(c){ var p=priceOf(c); if(!p) return null; var v=parseInt(String(p.n||"").replace(/[^0-9]/g,""),10) || parseInt(String(p.s||"").replace(/[^0-9]/g,""),10) || 0; return v||null; }
   function priceCell(c){
     var p=priceOf(c);
     if(!p) return '<span class="muted" title="가격 정보 없음">–</span>';
     var parts=[]; if(p.n) parts.push("일반 "+p.n); if(p.s) parts.push("특실 "+p.s);
-    return '<span class="price">'+parts.join(" / ")+'<small>만</small></span><span class="pyr y'+p.y+'" title="'+(p.y==="25"?"서울 2025.6 공식":"복지부 2023.12")+'">’'+p.y+'</span>';
+    return '<span class="price">'+parts.join(" / ")+'<small>만</small></span>';
   }
 
   var bySido={}, sidoOrder=[];

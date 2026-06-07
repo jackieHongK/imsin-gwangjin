@@ -18,3 +18,7 @@ _pdf_pages/
 sanhujo_raw.bin
 ld_cookies.txt
 ld_validate.txt
+
+# 가격 원본(보건복지부 XLSX, 재생성 가능: build_price.py)
+sanhujo_price_*.xlsx
+mohw_*.bin
