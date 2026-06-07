@@ -136,7 +136,10 @@ a:hover { text-decoration: underline; }
 .hero-grid .hero-text .lead { margin-left: 0; margin-right: 0; }
 .hero-grid .hero-badges { justify-content: flex-start; }
 .hero-grid .hero-illust { flex: 0 0 400px; max-width: 400px; }
-.hero-grid .hero-illust img { width: 100%; height: auto; display: block; filter: drop-shadow(0 14px 32px rgba(150,110,110,.18)); }
+.hero-grid .hero-illust img { width: 100%; height: auto; display: block; border-radius: 22px; box-shadow: 0 16px 36px rgba(150,110,110,.18); }
+/* 섹션/페이지 배너 이미지 */
+.sec-banner { display: block; width: 100%; max-width: 760px; margin: 4px auto 26px; border-radius: 18px; box-shadow: var(--shadow); }
+.page-banner { display: block; width: 100%; max-width: 900px; margin: 22px auto 0; border-radius: 18px; box-shadow: var(--shadow-lg); }
 @media (max-width: 860px) {
   .hero-grid { flex-direction: column-reverse; text-align: center; gap: 18px; }
   .hero-grid .hero-illust { flex: none; max-width: 280px; }
