@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 360" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbe7ec"/><stop offset="1" stop-color="#eaf3ec"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9eb5"/><stop offset="1" stop-color="#d96e85"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="424" height="344" rx="34" fill="url(#sky)"/>
+  <!-- 구름 -->
+  <g fill="#ffffff" opacity=".85">
+    <ellipse cx="96" cy="70" rx="34" ry="18"/><ellipse cx="124" cy="64" rx="26" ry="16"/>
+    <ellipse cx="350" cy="96" rx="30" ry="15"/><ellipse cx="376" cy="90" rx="22" ry="13"/>
+  </g>
+  <!-- 해/달 -->
+  <circle cx="360" cy="60" r="26" fill="#ffe066" opacity=".9"/>
+  <!-- 큰 하트 -->
+  <path d="M220 300 C150 250 120 210 120 172 C120 140 144 120 172 120 C194 120 210 134 220 152 C230 134 246 120 268 120 C296 120 320 140 320 172 C320 210 290 250 220 300 Z" fill="url(#heart)"/>
+  <!-- 하트 안 아기 얼굴 -->
+  <circle cx="220" cy="182" r="40" fill="#fff3e9"/>
+  <circle cx="206" cy="180" r="4.5" fill="#5b4a45"/><circle cx="234" cy="180" r="4.5" fill="#5b4a45"/>
+  <path d="M210 196 Q220 206 230 196" stroke="#5b4a45" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <circle cx="198" cy="192" r="6" fill="#ffb3c2" opacity=".7"/><circle cx="242" cy="192" r="6" fill="#ffb3c2" opacity=".7"/>
+  <path d="M200 150 Q220 138 240 150" stroke="#fff3e9" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- 달력 태그 "10개월" -->
+  <g transform="rotate(-8 92 250)">
+    <rect x="48" y="222" width="92" height="74" rx="12" fill="#ffffff" stroke="#7bae8e" stroke-width="3"/>
+    <rect x="48" y="222" width="92" height="22" rx="11" fill="#7bae8e"/>
+    <circle cx="68" cy="218" r="4" fill="#7bae8e"/><circle cx="120" cy="218" r="4" fill="#7bae8e"/>
+    <text x="94" y="276" font-size="30" font-weight="800" text-anchor="middle" fill="#3b3a3c" font-family="Pretendard,sans-serif">10</text>
+    <text x="94" y="290" font-size="12" font-weight="700" text-anchor="middle" fill="#6c6a6e" font-family="Pretendard,sans-serif">개월</text>
+  </g>
+  <!-- 작은 하트/별 장식 -->
+  <path d="M330 230 c-6-7-16-3-16 5 0 7 16 16 16 16 0 0 16-9 16-16 0-8-10-12-16-5Z" fill="#ff9eb5" opacity=".85"/>
+  <circle cx="300" cy="290" r="6" fill="#9ad7ff" opacity=".8"/>
+  <circle cx="150" cy="318" r="5" fill="#ffe066"/>
+  <text x="356" y="300" font-size="22">✨</text>
+  <text x="74" y="150" font-size="20">🌷</text>
+</svg>

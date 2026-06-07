@@ -58,6 +58,20 @@
   .ratio.warn{background:#fdecef;color:var(--rose-dark)}
   .price{font-weight:800;color:var(--rose-dark);font-size:.84rem;white-space:nowrap}
   .price small{font-weight:600;color:var(--ink-soft);font-size:.7em;margin-left:1px}
+  .pyr{font-size:.58rem;font-weight:800;margin-left:3px;padding:0 4px;border-radius:4px;vertical-align:super}
+  .pyr.y25{background:var(--sage-soft);color:var(--sage-dark)}
+  .pyr.y23{background:var(--cream-2);color:var(--ink-soft)}
+  .rev-region{margin:22px 0 10px;font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:8px}
+  .rev-region .rc{font-size:.76rem;font-weight:700;background:var(--sage-soft);color:var(--sage-dark);padding:2px 9px;border-radius:999px}
+  .rev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+  .nrev{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+  .nrev h4{font-size:1.04rem;margin-bottom:3px}
+  .nrev .area{font-size:.8rem;color:var(--ink-soft);margin-bottom:8px}
+  .nrev .feat{font-size:.9rem;color:var(--ink);margin-bottom:8px}
+  .nrev .rev{font-size:.9rem;background:#fff7e6;border-left:4px solid var(--gold);padding:8px 12px;border-radius:8px;color:var(--ink)}
+  .nrev .rev b{color:#9a6a1f}
+  .nrev .src{font-size:.8rem;margin-top:8px}
+  .nrev .src a{color:var(--ink-soft);margin-right:8px}
   .row-links{display:flex;gap:4px}
   .ic-btn{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:.9rem}
   .ic-btn:hover{border-color:var(--sage);background:var(--sage-soft)}
@@ -138,7 +152,7 @@
 <div class="wrap" style="margin-top:24px;">
   <div class="disclaimer">
     <strong>⚠️ 안내</strong> · 시설·정원·간호인력 데이터 출처는 <a href="https://www.localdata.go.kr" target="_blank" rel="noopener">행정안전부 지방행정 인허가 데이터(산후조리업)</a>이며 <b>영업중</b> 기준입니다.
-    <b>가격(2주)</b>은 현재 <b>서울 2025.6 공식요금</b>만 연동(전화번호 매칭)돼 있고, 그 외 지역 가격은 <b>보건복지부 전국 산후조리원 현황(2023.12)</b> 연동을 준비 중입니다. 정원·인력은 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
+    <b>가격(2주)</b> 출처 — <span class="pyr y25">’25</span> 서울은 <b>2025.6 공식요금</b>, <span class="pyr y23">’23</span> 그 외 지역은 <b>보건복지부 전국 현황(2023.12)</b>입니다(전화·상호 매칭). 정원·인력은 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
   </div>
 </div>
 
@@ -253,15 +267,29 @@
   </div>
 </section>
 
+<section class="block" id="reviews" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:18px">
+      <span class="kicker">Reviews</span>
+      <h2>💬 지역별 인기 산후조리원 후기</h2>
+      <p>서울 외 주요 지역에서 검색·추천이 많은 조리원의 특징과 후기 경향을 요약했어요. (서울은 <a href="seoul-compare.html">구별 비교</a>에서)</p>
+    </div>
+    <div id="revBox"></div>
+    <p class="src" style="margin-top:14px;font-size:.82rem;color:var(--ink-soft)">출처 · 맘카페·네이버 블로그·플레이스·뉴스·공식 홈페이지 종합(2026.6). 별점 수치 미인용, 일부는 추가 확인 권장. 결정 전 직접 방문·문의하세요.</p>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="wrap">
     <div class="brand"><span class="logo">💗</span> 10달 뒤 건강하게 만나자</div>
-    <p>시설·인력·정원: 행정안전부 인허가 데이터(영업중, 매일 갱신) · 정원·인력은 신고 기준 · 결정 전 직접 확인하세요.</p>
+    <p>시설·인력·정원: 행정안전부 인허가 데이터(영업중, 매일 갱신) · 가격: 서울 2025.6/그 외 복지부 2023.12 · 후기: 웹 요약 · 결정 전 직접 확인하세요.</p>
   </div>
 </footer>
 
 <script src="seoul-data.js"></script>
+<script src="price-national.js"></script>
 <script src="national-data.js"></script>
+<script src="national-reviews.js"></script>
 <script>
 (function(){
   "use strict";
@@ -272,13 +300,19 @@
   function pnorm(s){ return String(s).replace(/\(주\)/g,"").replace(/\(.*?\)/g,"").replace(/산후조리원/g,"").replace(/\s+/g,"").toLowerCase(); }
   var priceByPhone={}, priceByName={};
   SEOUL.forEach(function(c){ var d=pdig(c.tel); if(d) priceByPhone[d]={n:c.normal,s:c.special}; priceByName[pnorm(c.name)]={n:c.normal,s:c.special}; });
-  function priceOf(c){ if(c.sd!=="서울") return null; return priceByPhone[pdig(c.t)] || priceByName[pnorm(c.n)] || null; }
+  var P23 = (typeof PRICE_2023 !== "undefined") ? PRICE_2023 : {phone:{}, name:{}};
+  function priceOf(c){
+    if(c.sd==="서울"){ var ps = priceByPhone[pdig(c.t)] || priceByName[pnorm(c.n)]; if(ps) return {n:ps.n, s:ps.s, y:"25"}; }
+    var pm = P23.phone[pdig(c.t)] || P23.name[pnorm(c.n)+"|"+c.sg];
+    if(pm) return {n:pm.n, s:pm.s, y:"23"};
+    return null;
+  }
   function priceNum(c){ var p=priceOf(c); if(!p) return null; var v=parseInt(String(p.n||"").replace(/[^0-9]/g,""),10) || parseInt(String(p.s||"").replace(/[^0-9]/g,""),10) || 0; return v||null; }
   function priceCell(c){
     var p=priceOf(c);
-    if(!p) return c.sd==="서울" ? '<span class="muted">–</span>' : '<span class="muted" title="복지부 전국 가격 연동 예정">·</span>';
+    if(!p) return '<span class="muted" title="가격 정보 없음">–</span>';
     var parts=[]; if(p.n) parts.push("일반 "+p.n); if(p.s) parts.push("특실 "+p.s);
-    return '<span class="price">'+parts.join(" / ")+'<small>만</small></span>';
+    return '<span class="price">'+parts.join(" / ")+'<small>만</small></span><span class="pyr y'+p.y+'" title="'+(p.y==="25"?"서울 2025.6 공식":"복지부 2023.12")+'">’'+p.y+'</span>';
   }
 
   var bySido={}, sidoOrder=[];
@@ -390,6 +424,24 @@
     clearTimeout(t); var q=e.target.value;
     t=setTimeout(function(){ searchQ=q.trim(); render(); },180);
   });
+
+  // 지역별 인기 조리원 후기 렌더
+  (function(){
+    var R = (typeof NATIONAL_REVIEWS !== "undefined") ? NATIONAL_REVIEWS : [];
+    var box = document.getElementById('revBox'); if(!box || !R.length) return;
+    var byS={}, ord=[];
+    R.forEach(function(r){ if(!byS[r.sido]){byS[r.sido]=[];ord.push(r.sido);} byS[r.sido].push(r); });
+    box.innerHTML = ord.map(function(sd){
+      return '<div class="rev-region">'+esc(sd)+' <span class="rc">'+byS[sd].length+'곳</span></div>'+
+        '<div class="rev-grid">'+ byS[sd].map(function(r){
+          var src=(r.sources||[]).map(function(u,i){return '<a href="'+u+'" target="_blank" rel="noopener">출처'+(i+1)+'</a>';}).join('');
+          return '<div class="nrev"><h4>'+esc(r.name)+'</h4><div class="area">📍 '+esc(r.area||r.sigungu||'')+'</div>'+
+            (r.features?'<div class="feat">📌 '+esc(r.features)+'</div>':'')+
+            (r.review?'<div class="rev"><b>후기</b> · '+esc(r.review)+'</div>':'')+
+            (src?'<div class="src">'+src+'</div>':'')+'</div>';
+        }).join('') +'</div>';
+    }).join('');
+  })();
 
   renderChips(); render();
 })();
