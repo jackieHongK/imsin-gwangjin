@@ -75,10 +75,12 @@ a:hover { text-decoration: underline; }
 .gnb-top .chev { font-size: 0.66rem; opacity: 0.55; transition: transform .15s; }
 .gnb-group:hover .gnb-top, .gnb-group:focus-within .gnb-top, .gnb-top:hover { background: var(--rose-soft); color: var(--rose-dark); }
 .gnb-menu {
-  position: absolute; top: calc(100% + 6px); left: 0; min-width: 220px; background: var(--white);
+  position: absolute; top: calc(100% + 8px); left: 0; min-width: 220px; background: var(--white);
   border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-lg); padding: 8px;
   display: none; flex-direction: column; gap: 1px; z-index: 120;
 }
+/* 버튼↔메뉴 사이 간격을 덮는 투명 hover 브릿지 (호버 끊김 방지) */
+.gnb-menu::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 12px; }
 .gnb-group:hover .gnb-menu, .gnb-group:focus-within .gnb-menu, .gnb-group.open .gnb-menu { display: flex; }
 .gnb-menu a {
   padding: 9px 12px; border-radius: 9px; font-size: 0.92rem; font-weight: 600; color: var(--ink); white-space: nowrap;

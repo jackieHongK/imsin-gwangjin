@@ -56,6 +56,8 @@
   .ratio.good{background:var(--sage-soft);color:var(--sage-dark)}
   .ratio.mid{background:var(--cream-2);color:var(--ink)}
   .ratio.warn{background:#fdecef;color:var(--rose-dark)}
+  .price{font-weight:800;color:var(--rose-dark);font-size:.84rem;white-space:nowrap}
+  .price small{font-weight:600;color:var(--ink-soft);font-size:.7em;margin-left:1px}
   .row-links{display:flex;gap:4px}
   .ic-btn{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:.9rem}
   .ic-btn:hover{border-color:var(--sage);background:var(--sage-soft)}
@@ -84,7 +86,7 @@
 
 <header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="index.html"><span class="logo">🤰</span> 임신 가이드</a>
+    <a class="brand" href="index.html"><span class="logo">💗</span> 10달 뒤 건강하게 만나자</a>
     <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
     <nav class="gnb">
       <div class="gnb-group">
@@ -136,7 +138,7 @@
 <div class="wrap" style="margin-top:24px;">
   <div class="disclaimer">
     <strong>⚠️ 안내</strong> · 시설·정원·간호인력 데이터 출처는 <a href="https://www.localdata.go.kr" target="_blank" rel="noopener">행정안전부 지방행정 인허가 데이터(산후조리업)</a>이며 <b>영업중</b> 기준입니다.
-    <b>가격</b>은 이 데이터에 포함되지 않습니다(서울은 <a href="seoul-compare.html">구별 비교</a>에서 2025 공식요금 제공, 전국 가격은 추후 보강 예정). 정원·인력은 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
+    <b>가격(2주)</b>은 현재 <b>서울 2025.6 공식요금</b>만 연동(전화번호 매칭)돼 있고, 그 외 지역 가격은 <b>보건복지부 전국 산후조리원 현황(2023.12)</b> 연동을 준비 중입니다. 정원·인력은 신고 기준이라 실제 운영과 다를 수 있으니 방문·전화로 확인하세요.
   </div>
 </div>
 
@@ -217,6 +219,7 @@
       <div class="search-box"><input id="search" type="search" placeholder="조리원 이름으로 전국 검색" autocomplete="off" /></div>
       <div class="seg" id="sortSeg">
         <button data-sort="ratioAsc" class="active">간호집중순</button>
+        <button data-sort="priceAsc">가격 낮은순</button>
         <button data-sort="capDesc">정원 큰순</button>
         <button data-sort="name">이름순</button>
       </div>
@@ -227,6 +230,7 @@
         <thead>
           <tr>
             <th>상호 · 시군구</th>
+            <th class="s" data-s="priceAsc">가격<br>(2주)</th>
             <th class="s num" data-s="capDesc">신생아<br>정원</th>
             <th class="num">간호사</th>
             <th class="num">조무사</th>
@@ -251,16 +255,32 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <div class="brand"><span class="logo">🤰</span> 임신 가이드</div>
+    <div class="brand"><span class="logo">💗</span> 10달 뒤 건강하게 만나자</div>
     <p>시설·인력·정원: 행정안전부 인허가 데이터(영업중, 매일 갱신) · 정원·인력은 신고 기준 · 결정 전 직접 확인하세요.</p>
   </div>
 </footer>
 
+<script src="seoul-data.js"></script>
 <script src="national-data.js"></script>
 <script>
 (function(){
   "use strict";
   var data = NATIONAL_CENTERS;
+  var SEOUL = (typeof SEOUL_CENTERS !== "undefined") ? SEOUL_CENTERS : [];
+  // 서울 2025.6 공식 가격을 전화번호(우선)·상호로 매칭
+  function pdig(t){ return String(t||"").replace(/\D/g,""); }
+  function pnorm(s){ return String(s).replace(/\(주\)/g,"").replace(/\(.*?\)/g,"").replace(/산후조리원/g,"").replace(/\s+/g,"").toLowerCase(); }
+  var priceByPhone={}, priceByName={};
+  SEOUL.forEach(function(c){ var d=pdig(c.tel); if(d) priceByPhone[d]={n:c.normal,s:c.special}; priceByName[pnorm(c.name)]={n:c.normal,s:c.special}; });
+  function priceOf(c){ if(c.sd!=="서울") return null; return priceByPhone[pdig(c.t)] || priceByName[pnorm(c.n)] || null; }
+  function priceNum(c){ var p=priceOf(c); if(!p) return null; var v=parseInt(String(p.n||"").replace(/[^0-9]/g,""),10) || parseInt(String(p.s||"").replace(/[^0-9]/g,""),10) || 0; return v||null; }
+  function priceCell(c){
+    var p=priceOf(c);
+    if(!p) return c.sd==="서울" ? '<span class="muted">–</span>' : '<span class="muted" title="복지부 전국 가격 연동 예정">·</span>';
+    var parts=[]; if(p.n) parts.push("일반 "+p.n); if(p.s) parts.push("특실 "+p.s);
+    return '<span class="price">'+parts.join(" / ")+'<small>만</small></span>';
+  }
+
   var bySido={}, sidoOrder=[];
   data.forEach(function(c){ if(!bySido[c.sd]){bySido[c.sd]=[];sidoOrder.push(c.sd);} bySido[c.sd].push(c); });
   document.getElementById('hTotal').textContent = data.length;
@@ -282,6 +302,7 @@
     var a=list.slice();
     if(sortMode==='name') a.sort(function(x,y){return x.n.localeCompare(y.n,'ko');});
     else if(sortMode==='capDesc') a.sort(function(x,y){return (y.ci||0)-(x.ci||0);});
+    else if(sortMode==='priceAsc') a.sort(function(x,y){ var px=priceNum(x), py=priceNum(y); if(px==null&&py==null)return 0; if(px==null)return 1; if(py==null)return -1; return px-py; });
     else { // ratioAsc: 비율 낮은(집중) 순, N/A는 뒤로
       a.sort(function(x,y){ var rx=ratio(x), ry=ratio(y); if(rx==null&&ry==null)return 0; if(rx==null)return 1; if(ry==null)return -1; return rx-ry; });
     }
@@ -295,6 +316,7 @@
   function rowHTML(c){
     return '<tr>'+
       '<td><b>'+esc(c.n)+'</b><div class="muted" style="font-size:.8rem">'+esc(c.sd)+' '+esc(c.sg)+'</div></td>'+
+      '<td>'+priceCell(c)+'</td>'+
       '<td class="num">'+(c.ci||'–')+'</td>'+
       '<td class="num">'+(c.ns||'–')+'</td>'+
       '<td class="num">'+(c.na||'–')+'</td>'+
@@ -311,7 +333,7 @@
   function render(){
     var list=sortList(curList());
     var body=document.getElementById('natBody');
-    if(!list.length){ body.innerHTML='<tr><td colspan="8" style="text-align:center;padding:30px;color:var(--ink-soft)">결과가 없어요.</td></tr>'; return; }
+    if(!list.length){ body.innerHTML='<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--ink-soft)">결과가 없어요.</td></tr>'; return; }
     body.innerHTML = list.map(rowHTML).join('');
     // 정렬 헤더 표시
     document.querySelectorAll('.nat-table th.s').forEach(function(th){ th.classList.toggle('on', th.dataset.s===sortMode); });
