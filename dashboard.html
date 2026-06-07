@@ -45,9 +45,38 @@
   .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
   .note{font-size:.8rem;color:var(--muted);margin-top:18px;text-align:center}
   .updated{font-size:.78rem;color:#cbb}
+  /* 로그인 게이트 */
+  #gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#f9e3e7,#fdf9f6 55%,#e4f0e8);
+        display:flex;align-items:center;justify-content:center;padding:20px}
+  .gate-box{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 14px 40px rgba(150,110,110,.18);
+            padding:34px 30px;width:100%;max-width:340px;text-align:center}
+  .gate-emoji{font-size:2.4rem}
+  .gate-box h1{font-size:1.3rem;margin:8px 0 2px;display:block}
+  .gate-box p{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+  .gate-box input[type=password]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:1rem;font-family:inherit}
+  .gate-box input[type=password]:focus{outline:none;border-color:var(--rose)}
+  .gate-remember{display:flex;align-items:center;gap:6px;justify-content:center;font-size:.82rem;color:var(--muted);margin:12px 0}
+  .gate-box button{width:100%;padding:12px;border:0;border-radius:12px;background:var(--rose);color:#fff;font-weight:800;font-size:1rem;font-family:inherit;cursor:pointer}
+  .gate-box button:hover{background:var(--rose-d)}
+  .gate-err{color:var(--rose-d);font-size:.85rem;margin-top:10px;min-height:18px}
 </style>
 </head>
 <body>
+
+<!-- 로그인 게이트 (클라이언트 측 · 비밀번호 평문 미포함, SHA-256 해시만 대조) -->
+<div id="gate">
+  <form id="gateForm" class="gate-box">
+    <div class="gate-emoji">🔒</div>
+    <h1>관리자 로그인</h1>
+    <p>트래픽 분석 대시보드</p>
+    <input id="pw" type="password" placeholder="비밀번호" autocomplete="current-password" autofocus />
+    <label class="gate-remember"><input type="checkbox" id="remember" /> 이 브라우저에서 로그인 유지</label>
+    <button type="submit">들어가기</button>
+    <div id="gateErr" class="gate-err" role="alert"></div>
+  </form>
+</div>
+
+<div id="app" style="display:none">
 <header>
   <h1>📊 트래픽 분석 <span class="sub">광진구 임신·출산 가이드 · 자체 집계(GA 미사용)</span></h1>
   <div class="ranges" id="ranges">
@@ -55,6 +84,7 @@
     <button data-days="30" class="active">30일</button>
     <button data-days="90">90일</button>
     <button data-days="3650">전체</button>
+    <button id="logout" style="background:#7a6f73" title="로그아웃">로그아웃</button>
   </div>
 </header>
 
@@ -97,7 +127,70 @@
 
   <p class="note">데이터: 같은 도메인 <code>analytics/events.ndjson</code> · 쿠키 없음 · 원본 IP 미저장 · <span class="updated" id="updated"></span></p>
 </div>
+</div><!-- /#app -->
 
-<script src="dashboard.js"></script>
+<script>
+/* 관리자 게이트: 비밀번호 평문은 코드에 없음. SALT+입력의 SHA-256 해시만 대조.
+   인증 성공 시에만 dashboard.js를 주입해 데이터를 불러온다. */
+(function(){
+  var SALT = 'imsin-gwangjin::admin::v1::';
+  var HASH = '4a8700dfe4a3f43b3b4f3663466da18caaaef089dcd8c246219a700efc1c5b35';
+  var KEY  = '_ag_admin_ok';
+  var gate = document.getElementById('gate');
+  var app  = document.getElementById('app');
+
+  // 보안 컨텍스트(https/localhost)가 아니면 crypto.subtle이 없어 → 순수 JS SHA-256 폴백(http LAN 대응)
+  function jsSha256(ascii){
+    function rr(v,a){ return (v>>>a)|(v<<(32-a)); }
+    var mp=Math.pow, mw=mp(2,32), res='', words=[], bitLen=ascii.length*8, hash=[], k=[], pc=0, comp={};
+    for(var c=2; pc<64; c++){
+      if(!comp[c]){ for(var i=0;i<313;i+=c){ comp[i]=c; } hash[pc]=(mp(c,.5)*mw)|0; k[pc++]=(mp(c,1/3)*mw)|0; }
+    }
+    ascii+='\x80'; while(ascii.length%64-56) ascii+='\x00';
+    for(i=0;i<ascii.length;i++){ var j=ascii.charCodeAt(i); if(j>>8) return ''; words[i>>2]|=j<<((3-i)%4)*8; }
+    words[words.length]=((bitLen/mw)|0); words[words.length]=(bitLen);
+    for(j=0;j<words.length;){
+      var w=words.slice(j,j+=16), oh=hash; hash=hash.slice(0,8);
+      for(i=0;i<64;i++){
+        var w15=w[i-15], w2=w[i-2], a=hash[0], e=hash[4];
+        var t1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]
+          +(w[i]=i<16?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);
+        var t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+        hash=[(t1+t2)|0].concat(hash); hash[4]=(hash[4]+t1)|0;
+      }
+      for(i=0;i<8;i++){ hash[i]=(hash[i]+oh[i])|0; }
+    }
+    for(i=0;i<8;i++){ for(j=3;j+1;j--){ var b=(hash[i]>>(j*8))&255; res+=((b<16)?0:'')+b.toString(16); } }
+    return res;
+  }
+  function digest(str){
+    if(window.crypto && window.crypto.subtle){
+      return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf){
+        return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+      });
+    }
+    return Promise.resolve(jsSha256(str));
+  }
+  function unlock(){
+    gate.style.display='none'; app.style.display='';
+    var s=document.createElement('script'); s.src='dashboard.js'; document.body.appendChild(s);
+    var lo=document.getElementById('logout');
+    if(lo) lo.addEventListener('click', function(){ sessionStorage.removeItem(KEY); localStorage.removeItem(KEY); location.reload(); });
+  }
+  if(sessionStorage.getItem(KEY)==='1' || localStorage.getItem(KEY)==='1'){ unlock(); return; }
+
+  var form=document.getElementById('gateForm'), pw=document.getElementById('pw'), err=document.getElementById('gateErr');
+  form.addEventListener('submit', function(e){
+    e.preventDefault(); err.textContent='';
+    digest(SALT + pw.value).then(function(h){
+      if(h===HASH){
+        sessionStorage.setItem(KEY,'1');
+        if(document.getElementById('remember').checked) localStorage.setItem(KEY,'1');
+        unlock();
+      } else { err.textContent='비밀번호가 올바르지 않습니다.'; pw.value=''; pw.focus(); }
+    }).catch(function(){ err.textContent='로그인 처리 중 오류가 발생했습니다.'; });
+  });
+})();
+</script>
 </body>
 </html>
