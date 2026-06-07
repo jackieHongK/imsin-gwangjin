@@ -54,7 +54,8 @@ a:hover { text-decoration: underline; }
   display: flex; align-items: center; justify-content: space-between;
   height: 64px;
 }
-.brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 1.12rem; color: var(--ink); }
+.brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 1.12rem; color: var(--ink); text-decoration: none; }
+.brand:hover { text-decoration: none; }
 .brand .logo { font-size: 1.4rem; }
 .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
 .nav-links a {
@@ -63,6 +64,46 @@ a:hover { text-decoration: underline; }
 }
 .nav-links a:hover { background: var(--rose-soft); color: var(--rose-dark); text-decoration: none; }
 .nav-toggle { display: none; background: none; border: 0; font-size: 1.5rem; cursor: pointer; color: var(--ink); }
+
+/* ---------- GNB (그룹형 내비) ---------- */
+.gnb { display: flex; gap: 4px; align-items: center; }
+.gnb-group { position: relative; }
+.gnb-top {
+  display: inline-flex; align-items: center; gap: 5px; background: none; border: 0; font-family: inherit;
+  font-weight: 700; font-size: 0.95rem; color: var(--ink); padding: 9px 14px; border-radius: 999px; cursor: pointer;
+}
+.gnb-top .chev { font-size: 0.66rem; opacity: 0.55; transition: transform .15s; }
+.gnb-group:hover .gnb-top, .gnb-group:focus-within .gnb-top, .gnb-top:hover { background: var(--rose-soft); color: var(--rose-dark); }
+.gnb-menu {
+  position: absolute; top: calc(100% + 6px); left: 0; min-width: 220px; background: var(--white);
+  border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-lg); padding: 8px;
+  display: none; flex-direction: column; gap: 1px; z-index: 120;
+}
+.gnb-group:hover .gnb-menu, .gnb-group:focus-within .gnb-menu, .gnb-group.open .gnb-menu { display: flex; }
+.gnb-menu a {
+  padding: 9px 12px; border-radius: 9px; font-size: 0.92rem; font-weight: 600; color: var(--ink); white-space: nowrap;
+}
+.gnb-menu a:hover { background: var(--cream-2); color: var(--rose-dark); text-decoration: none; }
+.gnb-menu .mlabel { font-size: 0.7rem; font-weight: 800; color: var(--ink-soft); padding: 7px 12px 2px; letter-spacing: 0.03em; }
+.gnb-group.cmp .gnb-top { color: var(--sage-dark); }
+.gnb-group.cmp:hover .gnb-top, .gnb-group.cmp:focus-within .gnb-top, .gnb-group.cmp .gnb-top:hover { background: var(--sage-soft); color: var(--sage-dark); }
+.gnb-group.cmp .gnb-menu a:hover { color: var(--sage-dark); }
+
+@media (max-width: 860px) {
+  .gnb {
+    display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: stretch;
+    background: var(--white); border-bottom: 1px solid var(--line); padding: 10px 14px; gap: 2px;
+    box-shadow: var(--shadow); max-height: 82vh; overflow: auto;
+  }
+  .gnb.open { display: flex; }
+  .gnb-group { position: static; }
+  .gnb-top { width: 100%; justify-content: space-between; }
+  .gnb-menu {
+    position: static; display: none; box-shadow: none; border: 0; border-radius: 0; padding: 2px 0 8px 12px; min-width: 0;
+  }
+  .gnb-group.open .gnb-menu { display: flex; }
+  .gnb-group.open .gnb-top .chev { transform: rotate(180deg); }
+}
 
 /* ---------- Hero ---------- */
 .hero {
